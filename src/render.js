@@ -1,3 +1,5 @@
+import 'svelte/ssr/register'
+
 import rp from 'request-promise-native'
 import mainTemplate from './src/templates/main.html!text'
 import { groupBy } from './js/libs/arrayObjectUtils.js'
@@ -5,10 +7,17 @@ import { groupBy } from './js/libs/arrayObjectUtils.js'
 export async function render() {
 	let data = await loadData();
 
-    
 
     data.map((obj) => {
-            console.log(obj.objArr)
+            
+
+                obj.objArr.sort(function(a, b) {
+                    if (a.score < b.score) return -1;
+                    if (a.score > b.score) return 1;
+                    return 0;
+                })
+
+                console.log(obj.objArr)
 
     })    
 
@@ -29,6 +38,8 @@ function formatData(data) {
    output.map((obj) => {
         obj.ref = count;
         obj.athEvent = obj.event+"_"+obj.status;
+        obj.score = obj.result;
+
 
         // obj.sortName = obj.family_name + obj.formatName;
         
@@ -43,12 +54,6 @@ function formatData(data) {
 
     //     count++;
      })
-
-    output.sort(function(a, b) {
-        if (a.athEvent < b.athEvent) return -1;
-        if (a.athEvent > b.athEvent) return 1;
-        return 0;
-    })
 
 
 
