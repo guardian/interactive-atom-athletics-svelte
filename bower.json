@@ -17,5 +17,9 @@
   ],
   "devDependencies": {
     "guss-typography": "^3.1.1"
+  },
+  "dependencies": {
+    "guss-typography": "^3.1.1",
+    "pasteup-palette": "^4.0.0"
   }
 }

@@ -1,5 +1,19 @@
 @import "mq";
 @import "fonts";
+@import "palette";
+
+$gold: $multimedia-main-2;
+$silver : $neutral-3;
+$bronze : rgb(240,146,77);
+
+$goldLight: rgba($gold, 0.7);
+$silverLight : rgba($silver, 0.7);
+$bronzeLight : rgba($bronze, 0.7);
+
+
+
+
+@import "leaderBoard";
 
 // Uncomment for embeds
 //@import "embed";
@@ -11,3 +25,48 @@
 .interactive-atom {
     margin: 0 !important;
 }
+
+
+.gv-slice{
+	width:100%;
+	max-width:1300px;
+}
+
+
+.gv-slice-inner{
+		padding: 10px 0;
+		width:100%;
+		position:relative;
+
+		@include mq(tablet){
+			padding: 20px 0;
+		}
+
+		.gv-slice-inner-left{
+			width:100%;
+			float: left;
+			@include mq(leftCol){
+				width:140px;				
+			}
+
+			@include mq(wide){
+				width:240px;
+			}
+		}
+
+		.gv-slice-inner-main{
+			max-width:620px;
+			position:relative;
+			@include mq(leftCol){
+
+				margin-left:140px;
+
+			}
+
+			@include mq(wide){
+				margin-left:240px;
+			}
+		}
+	
+
+	}
