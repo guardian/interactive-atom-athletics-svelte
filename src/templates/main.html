@@ -15,10 +15,44 @@
 	        	{{> leaderRow }} 
 	        {{/each}}
 
-    	</ol>	
+    	   </ol>	
         <button class="js-leaderboard-button om-expand-button" id ="medal-expand-button">All countries</button>
         <button class="js-leaderboard-button om-collapse-button hide-el" id ="medal-collapse-button">Hide countries</button>
     	</div>	
+            
+        </div>
+</section>
+
+
+<section class="gv-slice-section">
+        <!-- <div class="gv-section-bullet-wrapper main-list-bullet" section-ref="{{objKey}}">
+            <div class="gv-section-bullet">{{objKey}}</div>
+        </div> -->
+
+        <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left">
+            <h3>Results and schedule</h3>
+        </div>  
+
+        <div class="gv-slice-inner-main">
+            <div class="gv-ux-holder">
+                <div class="gv-ux-left">
+
+                </div>  
+                
+                <div class="gv-ux-right">
+
+                </div>   
+            </div> 
+
+              
+            <ul class="om-table js-table" id="section-results">
+                {{#each eventsArr}}
+                    {{> resultRow }} 
+                {{/each}} 
+            </ul> 
+
+        </div>  
             
         </div>
 </section>

@@ -3,6 +3,7 @@ import 'svelte/ssr/register'
 import rp from 'request-promise-native'
 import mainTemplate from './src/templates/main.html!text'
 import leaderRowTemplate from './src/templates/leaderRow.html!text'
+import resultRowTemplate from './src/templates/resultRow.html!text'
 import { groupBy } from './js/libs/arrayObjectUtils.js'
 
 import Handlebars from 'handlebars'
@@ -16,21 +17,16 @@ export async function render() {
 
     var dataObj = {};
 
-    let eventsArr = groupBy(data, "athEvent");
-        eventsArr = sortByKeys(eventsArr);
-        dataObj.eventsArr = eventsArr;
+    let eventsArr = getEventsData(data)
 
-    data.map((obj) => { 
-            if(obj.medal){
-                //console.log(obj)
-            }
-    }) 
+    dataObj.eventsArr = eventsArr;
 
     let medalsArr = getMedalsData(data)
 
     dataObj.medalsArr = medalsArr;
 
-    var compiledHTML = compileHTML(dataObj);    
+    var compiledHTML = compileHTML(dataObj);
+
     return compiledHTML;
 }
 
@@ -44,6 +40,7 @@ export async function loadData() {
     return data;
 }
 
+
 function formatData(data) {
     let output = data.sheets.Sheet1;
    
@@ -51,15 +48,14 @@ function formatData(data) {
 
        output.map((obj) => {
             obj.ref = count;
-            obj.athEvent = obj.event+"_"+obj.status;
+            obj.athEvent = obj.sex+"_"+obj.event.split(" ").join("--")+"_"+obj.status.split(" ").join("--");
             obj.score = obj.result;
             if(obj.country == "United States"){ obj.country = "United States of America" }
             if(obj.country == "Great Britain"){ obj.country = "United Kingdom" }
             obj.ISO = countryCode.getAlpha3Code(obj.country, 'en'); 
             obj.flag = obj.ISO.toLowerCase();
 
-            console.log(obj.flag)
-  
+
             count++;
          })   
 
@@ -86,6 +82,25 @@ function sortByKeys(obj) {
     }
 
     return a;
+}
+
+function getEventsData(data){
+    let a = groupBy(data, "athEvent");
+        a = sortByKeys(a);
+
+   a.map((obj) => { 
+
+        obj.timeFormat = obj.objArr[0].start_time.split(".").join(":");
+        obj.dataDate = obj.objArr[0].date.split(" ").join("_");
+        obj.gender = obj.objArr[0].sex;
+        obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
+        obj.formatTitle = obj.objArr[0].event;
+        obj.objArr[0].result ? obj.result = true : obj.result = false; 
+
+        console.log(obj)      
+    }) 
+
+   return a
 }
 
 function getMedalsData(data){
@@ -151,9 +166,11 @@ function compileHTML(data) {
     });
 
     Handlebars.registerPartial({
-        'leaderRow': leaderRowTemplate //,
-        //'detailItem': detailItemTemplate
+        'leaderRow': leaderRowTemplate,
+        'resultRow': resultRowTemplate
     });
+
+
 
     var content = Handlebars.compile(
         mainTemplate, {

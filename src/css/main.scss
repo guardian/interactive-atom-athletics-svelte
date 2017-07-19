@@ -14,6 +14,7 @@ $bronzeLight : rgba($bronze, 0.7);
 
 
 @import "leaderBoard";
+@import "resultsBoard";
 
 // Uncomment for embeds
 //@import "embed";
@@ -30,6 +31,7 @@ $bronzeLight : rgba($bronze, 0.7);
 .gv-slice{
 	width:100%;
 	max-width:1300px;
+	padding-bottom:60px;
 }
 
 

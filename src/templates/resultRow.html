@@ -1,0 +1,45 @@
+<li class="om-table-row om-results-row  {{#if hidden}}hidden-row{{/if}}" data-id="{{objKey}}" data-position="1">
+    <div class="om-table-left-area">
+        <div class="om-table-row__time">{{timeFormat}}</div>
+        <div class="om-table-row__result-icon--{{result}}"></div>
+    </div>
+    <div class="om-table-row__result-title">{{gender}} {{formatTitle}}</div>
+    {{#if result}}
+    <div class="om-table-row__total">+</div>
+
+    <table class="om-result">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+               
+                <th></th>
+            </tr>
+            <tr class="om-result__subheaders">
+                <th></th>
+                <th></th>
+                <th>Athlete</th>
+               
+                <th class="om-entrant__header">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each objArr}}
+            <tr class="om-entrant ">
+                <td>
+                    <div class="om-medal om-medal--gold">icon</div>
+                </td>
+                <td>
+                    <div class="om-flag om-flag--JAM"  style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>
+                </td>
+                <td class="om-entrant__name" title="{{athlete}} ({{ISO}})">{{athlete}} ({{ISO}})</td>
+                
+                <td class="om-entrant__result">{{result}}</td>
+            </tr>
+             {{/each}}
+        </tbody>
+    </table>
+   
+    {{/if}}
+</li>

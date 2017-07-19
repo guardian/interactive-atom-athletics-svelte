@@ -189,7 +189,18 @@
     &.hidden-row{
     	display: none;
     }
+    &.om-results-row {
+    	border-top: 1px solid $neutral-4;
+    	padding-top:6px;
+		&:before {
+			border: none;
+			content: '';
+			
+		}
+	}
 }
+
+	
 
 .om-table-left-area {
 	position: absolute;
@@ -212,6 +223,7 @@
     display: inline-block;
     vertical-align: top;
     background-size: cover;
+    background-position: center;
     width: 20px;
     height: 20px;
     border-radius: 100px;
@@ -222,6 +234,14 @@
     display: inline-block;
     font-weight: bold;
 	width: 32px;
+	padding: 0 6px 0 4px;
+}
+
+.om-table-row__result-title {
+	@include fs-textSans(2);
+    display: inline-block;
+    font-weight: bold;
+	width: 180px;
 	padding: 0 6px 0 4px;
 }
 
