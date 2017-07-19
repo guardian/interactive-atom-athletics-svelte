@@ -9,23 +9,16 @@ import Handlebars from 'handlebars'
 
 import countryCode from 'i18n-iso-countries'
 
+let maxMedal;
+
 export async function render() {
 	let data = await loadData();
-    var compiledHTML = compileHTML(data);    
-    return compiledHTML;
-}
 
-export async function loadData() {
-    let data = formatData(await rp({
-        uri: 'https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1oQ96A25xpbPSsD8Mck.json',
-        json: true
-    }));
-
-    var mainObj = {};
+    var dataObj = {};
 
     let eventsArr = groupBy(data, "athEvent");
         eventsArr = sortByKeys(eventsArr);
-        mainObj.eventsArr = eventsArr;
+        dataObj.eventsArr = eventsArr;
 
     data.map((obj) => { 
             if(obj.medal){
@@ -33,11 +26,22 @@ export async function loadData() {
             }
     }) 
 
-    let medalsArr = getMedals(data)
+    let medalsArr = getMedalsData(data)
 
-    mainObj.medalsArr = medalsArr;
+    dataObj.medalsArr = medalsArr;
 
-    return mainObj;
+    var compiledHTML = compileHTML(dataObj);    
+    return compiledHTML;
+}
+
+// broke this out into a function so it could also be used in the gulpfile for the image resizing
+export async function loadData() {
+    let data = formatData(await rp({
+        uri: 'https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1oQ96A25xpbPSsD8Mck.json',
+        json: true
+    }));
+
+    return data;
 }
 
 function formatData(data) {
@@ -52,6 +56,9 @@ function formatData(data) {
             if(obj.country == "United States"){ obj.country = "United States of America" }
             if(obj.country == "Great Britain"){ obj.country = "United Kingdom" }
             obj.ISO = countryCode.getAlpha3Code(obj.country, 'en'); 
+            obj.flag = obj.ISO.toLowerCase();
+
+            console.log(obj.flag)
   
             count++;
          })   
@@ -70,10 +77,10 @@ function sortByKeys(obj) {
     var a = []
 
     for (i = 0; i < len; i++) {
-
         let k = keys[i];
         let t = {}
         t.objKey = k;
+        t.flag = k.toLowerCase();
         t.objArr = obj[k]
         a.push(t);
     }
@@ -81,8 +88,7 @@ function sortByKeys(obj) {
     return a;
 }
 
-function getMedals(data){
-
+function getMedalsData(data){
     let a = groupBy(data, "ISO");
     a = sortByKeys(a);
 
@@ -96,23 +102,46 @@ function getMedals(data){
                 if(item.medal === "Silver" ){ obj.medal.silver++ }
                 if(item.medal === "Bronze" ){ obj.medal.bronze++ }
             }) 
-
             obj.medal.total = obj.medal.gold + obj.medal.silver + obj.medal.bronze;
        }) 
 
-    a.sort((a, b) => (b.medal.gold - a.medal.gold)  || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze)  || (b.objKey - a.objKey) )
+    maxMedal = getMaxMedal(a)
+    console.log(maxMedal)
 
     var pos = 1;
+
+    a.sort((a, b) => (b.medal.gold - a.medal.gold)  || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze)  || (b.objKey - a.objKey) )
+
     a.map((obj) => {
         obj.medal.position = pos;
+        obj.hidden = pos < 11 ? false : true
+        obj.circleSizes = {
+                        "bronze": obj.bronze === 0 ? 0 : (obj.medal.bronze/maxMedal)*7 + 3,
+                        "silver": obj.silver === 0 ? 0 : (obj.medal.silver/maxMedal)*7 + 3,
+                        "gold": obj.gold === 0 ? 0 : (obj.medal.gold/maxMedal)*7 + 3
+                    }
         pos ++; 
     })
 
-    return a;
+    
 
+    return a;
 }
 
+function getMaxMedal(a){
+    let maxMedalCount = 0;
+    let max;
 
+    a.map((row) => { 
+        console.log(row.medal)
+        max = Math.max(row.medal.gold, row.medal.silver,row.medal.bronze);
+        maxMedalCount = max > maxMedalCount ? max : maxMedalCount;
+    })    
+    
+    max = maxMedalCount;
+    
+    return max;
+}
 
 function compileHTML(data) {
 

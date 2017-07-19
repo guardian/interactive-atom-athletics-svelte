@@ -52,6 +52,10 @@ $bronzeLight : rgba($bronze, 0.7);
 			@include mq(wide){
 				width:240px;
 			}
+
+			h3{
+				@include fs-header(3);
+			}
 		}
 
 		.gv-slice-inner-main{

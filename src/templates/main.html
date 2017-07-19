@@ -6,17 +6,18 @@
 
         <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
-        	<h2>Heading here</h2>
+        	<h3>Leaderboard</h3>
         </div>	
 
     	<div class="gv-slice-inner-main">
-			<ol class="om-table js-table">
+			<ol class="om-table js-table" id="section-leaderboard">
 			{{#each medalsArr}}
 	        	{{> leaderRow }} 
 	        {{/each}}
 
     	</ol>	
-
+        <button class="js-leaderboard-button om-expand-button" id ="medal-expand-button">All countries</button>
+        <button class="js-leaderboard-button om-collapse-button hide-el" id ="medal-collapse-button">Hide countries</button>
     	</div>	
             
         </div>

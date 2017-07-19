@@ -185,6 +185,10 @@
     .is-expanded &.om-table-row--extra {
         display: block;
     }
+
+    &.hidden-row{
+    	display: none;
+    }
 }
 
 .om-table-left-area {
@@ -194,11 +198,12 @@
 }
 
 .om-table-row__position {
-	@include fs-headline(2);
+	@include fs-textSans(2);
     display: inline-block;
-	text-align: right;
+	text-align: left;
 	padding-right: 8px;
 	width: 20px;
+	padding-top:2px;
 	min-height: 12px;
 	float: left;
 }
@@ -206,11 +211,16 @@
 .om-table-row__flag {
     display: inline-block;
     vertical-align: top;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
 }
 
 .om-table-row__country {
-	@include fs-headline(2);
+	@include fs-textSans(2);
     display: inline-block;
+    font-weight: bold;
 	width: 32px;
 	padding: 0 6px 0 4px;
 }
@@ -227,11 +237,12 @@
 }
 
 .om-table-row__total {
-	@include fs-headline(2);
+	@include fs-textSans(2);
 	position: absolute;
 	right: 0;
 	font-weight: bold;
 	padding-left: 6px;
+	padding-top:2px;
     background-color: white;
 }
 
@@ -244,7 +255,7 @@
     margin: -4px 0 0 -4px;
 	left: 50%;
 	top: 50%;
-	z-index: 2;
+	// z-index: 2;
 }
 
 .om-medal-white {
@@ -276,7 +287,7 @@
 
 }
 
-.om-expand-button {
+.js-leaderboard-button {
 
 	float: right;
 	background:none;
@@ -290,7 +301,7 @@
 	outline:none;
 	cursor:pointer;
 	transition: 200ms color, 200ms border-color;
-	background-image:url(assets/imgs/plus.svg);
+
 	background-size:13px;
 	background-repeat:no-repeat;
 	background-position: 9px center;
@@ -298,8 +309,13 @@
 	padding-bottom:0;
 	padding-top:0;
 	margin: 12px;
-	&.hide-button{
-		background-image:url(assets/imgs/minus.svg);
+	&.om-expand-button{
+		background-image:url('<%= path %>/assets/imgs/plus.svg');
+
+
+	}
+	&.om-collapse-button{
+		background-image:url('<%= path %>/assets/imgs/minus.svg');
 	}
 	&:hover{
 		border-color:#767676;
@@ -328,4 +344,12 @@
 
 .om-country-p {
 	@include fs-textSans(3);
+}
+
+.hide-el{
+    display: none;
+}
+
+.show-el{
+    display: block;
 }

@@ -19,6 +19,8 @@ import rp from 'request-promise-native'
 import runSequence from 'run-sequence'
 import source from 'vinyl-source-stream'
 
+import { loadData } from './src/render'
+
 const browser = browserSync.create();
 
 const buildDir = '.build';
