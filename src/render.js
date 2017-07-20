@@ -4,6 +4,8 @@ import rp from 'request-promise-native'
 import mainTemplate from './src/templates/main.html!text'
 import leaderRowTemplate from './src/templates/leaderRow.html!text'
 import resultRowTemplate from './src/templates/resultRow.html!text'
+
+import dayRowTemplate from './src/templates/dayRow.html!text'
 import { groupBy } from './js/libs/arrayObjectUtils.js'
 
 import Handlebars from 'handlebars'
@@ -18,12 +20,13 @@ export async function render() {
     var dataObj = {};
 
     let eventsArr = getEventsData(data)
-
     dataObj.eventsArr = eventsArr;
 
     let medalsArr = getMedalsData(data)
-
     dataObj.medalsArr = medalsArr;
+
+    let daysArr = getDaysArr(data)
+    dataObj.daysArr = daysArr;
 
     var compiledHTML = compileHTML(dataObj);
 
@@ -48,7 +51,7 @@ function formatData(data) {
 
        output.map((obj) => {
             obj.ref = count;
-            obj.athEvent = obj.sex+"_"+obj.event.split(" ").join("--")+"_"+obj.status.split(" ").join("--");
+            obj.athEvent = obj.sex+"_"+obj.event.split(" ").join("--")+"_"+obj.stage.split(" ").join("--");
             obj.score = obj.result;
             if(obj.country == "United States"){ obj.country = "United States of America" }
             if(obj.country == "Great Britain"){ obj.country = "United Kingdom" }
@@ -89,24 +92,71 @@ function getEventsData(data){
         a = sortByKeys(a);
 
    a.map((obj) => { 
-
         obj.timeFormat = obj.objArr[0].start_time.split(".").join(":");
         obj.dataDate = obj.objArr[0].date.split(" ").join("_");
         obj.gender = obj.objArr[0].sex;
         obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
-        obj.formatTitle = obj.objArr[0].event;
+        obj.formatTitle = obj.objArr[0].event+" "+obj.objArr[0].stage;
         obj.objArr[0].result ? obj.result = true : obj.result = false; 
 
-        console.log(obj)      
+        if(obj.objArr[0].measure == "time" ){
+            obj.objArr.sort((a, b) => (a.score - b.score))
+        }else{
+            obj.objArr.sort((a, b) => (b.score - a.score))
+        }
+ 
+        obj.objArr.map((athlete, k) => { 
+            athlete.place = k + 1;
+        }) 
     }) 
 
    return a
 }
 
+
+
+function getDaysArr(data){
+    let a = groupBy(data, "date");
+        a = sortByKeys(a);
+
+   a.map((obj, k) => { 
+        let eventsArr = getEventsData(obj.objArr)
+      
+        obj.dayEventsArr = eventsArr;
+        obj.dayNumber = k+1
+        console.log(obj.dayEventsArr[0])
+        // obj.timeFormat = obj.objArr[0].start_time.split(".").join(":");
+        // obj.dataDate = obj.objArr[0].date.split(" ").join("_");
+        // obj.gender = obj.objArr[0].sex;
+        // obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
+        // obj.formatTitle = obj.objArr[0].event+" "+obj.objArr[0].stage;
+        // obj.objArr[0].result ? obj.result = true : obj.result = false; 
+
+        // if(obj.objArr[0].measure == "time" ){
+        //     obj.objArr.sort((a, b) => (a.score - b.score))
+        // }else{
+        //     obj.objArr.sort((a, b) => (b.score - a.score))
+        // }
+ 
+        // obj.objArr.map((athlete, k) => { 
+        //     athlete.place = k + 1;
+        // }) 
+    }) 
+
+
+    //console.log(a)
+
+   return a
+}
+
+
+
+
+
 function getMedalsData(data){
     let a = groupBy(data, "ISO");
     a = sortByKeys(a);
-
+    
      a.map((obj) => { 
             obj.medal = {};
             obj.medal.gold = 0;
@@ -121,7 +171,7 @@ function getMedalsData(data){
        }) 
 
     maxMedal = getMaxMedal(a)
-    console.log(maxMedal)
+    
 
     var pos = 1;
 
@@ -148,7 +198,6 @@ function getMaxMedal(a){
     let max;
 
     a.map((row) => { 
-        console.log(row.medal)
         max = Math.max(row.medal.gold, row.medal.silver,row.medal.bronze);
         maxMedalCount = max > maxMedalCount ? max : maxMedalCount;
     })    
@@ -167,7 +216,8 @@ function compileHTML(data) {
 
     Handlebars.registerPartial({
         'leaderRow': leaderRowTemplate,
-        'resultRow': resultRowTemplate
+        'resultRow': resultRowTemplate,
+        'dayRow' : dayRowTemplate
     });
 
 

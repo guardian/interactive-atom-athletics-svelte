@@ -1,0 +1,48 @@
+<section class="gv-slice-section" data-id="day-slice-{{dayNumber}}">
+    <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left">
+            <h3>day {{dayNumber}}</h3>
+        </div>
+        <div class="gv-slice-inner-main">
+            <div class="gv-ux-holder">
+                <div class="gv-ux-left">
+                </div>
+                <div class="gv-ux-right">
+                </div>
+            </div>
+            
+
+                    {{#each dayEventsArr}}
+                    <div class="gv-ath-wrapper">
+                    <div class="gv-ath-day-event-title" data-id="{{objKey}}">
+                        <div class="gv-ath-day-event-title-time" >{{timeFormat}}</div>   
+                        <div class="gv-ath-day-event-title-main" >{{gender}} {{formatTitle}}</div>
+                    </div>
+
+                    <div class="gv-ath-day-event-table hide-el" data-id="{{objKey}}">
+                            {{#each objArr}}
+                            <div class="gv-ath-day-event-table-row">
+                                {{#if medal}}<div class="gv-ath-table-row__flag  color-{{medal}}" style="position:absolute; left:-36px"></div>{{/if}}
+                                <div class="gv-ath-table-el place">
+
+                                
+                                {{place}}.</div>
+
+
+                                <div class="gv-ath-table-el athlete"><div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div> {{athlete}} ({{ISO}})</div>
+                              
+                                <div class="gv-ath-table-el score">{{score}}</div>
+                            </div>
+                            {{/each}}
+                    </div> 
+
+                    </div>      
+                    {{/each}}
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- //style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"   <div class="gv-ath-table-el icon">{{#if medal}}<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>{{/if}}</div>-->

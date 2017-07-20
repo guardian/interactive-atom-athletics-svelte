@@ -24,7 +24,15 @@
 </section>
 
 
-<section class="gv-slice-section">
+
+
+
+
+{{#each daysArr}}
+    {{> dayRow }} 
+{{/each}}   
+
+<section class="gv-slice-section" style="margin-top:500px">
         <!-- <div class="gv-section-bullet-wrapper main-list-bullet" section-ref="{{objKey}}">
             <div class="gv-section-bullet">{{objKey}}</div>
         </div> -->
@@ -46,7 +54,7 @@
             </div> 
 
               
-            <ul class="om-table js-table" id="section-results">
+            <ul class="om-table js-table section-results">
                 {{#each eventsArr}}
                     {{> resultRow }} 
                 {{/each}} 
@@ -56,6 +64,11 @@
             
         </div>
 </section>
+
+
+<div class="om-date-schedule js-date-schedule is-expandable" data-startdate="2016-08-21">
+
+</div>  
 
 
 

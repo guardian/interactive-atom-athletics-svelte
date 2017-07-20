@@ -1,4 +1,100 @@
-.gv-athletes-list {
-	list-style-type: none;
-	padding-left: 0;
+.gv-ath-wrapper{
+	position:relative;
+	width:100%;
+	color: $neutral-1;
+	@include fs-textSans(3);
+	border-bottom:1px solid $neutral-3;
+	cursor:pointer;
+		.gv-ath-day-event-table{
+			position:relative;
+			margin: 12px 0 36px 60px;
+			width:100%;
+			color: $neutral-2;
+
+		}
+
+
+		.gv-ath-day-event-title{
+			margin:6px 0;
+
+			.gv-ath-day-event-title-time{
+				float: left;
+				display: inline-block;
+				width: 60px;
+			}
+			.gv-ath-day-event-title-main{
+				width: auto;
+			}
+
+		}
+
+		.gv-ath-day-event-table-row{
+			position:relative;
+			width:calc(100% - 60px);
+			height:24px;
+			border-top: 1px dotted $neutral-3;
+		}
+
+		.gv-ath-day-event-table-row:first-child  {
+		    border-top: none;
+		}
+			.schedule-row-time{
+				width:15%;
+			}
+			.schedule-row-name{
+				width:55%;
+			}
+			.schedule-row-location{
+				width:30%;
+			}
+
+			.gv-ath-table-el {
+				width:40px;
+				display: inline-block;
+				text-align: left;
+				overflow: hidden;
+				&.place{
+
+				}
+				&.score{
+					text-align:right;
+				}
+				&.athlete{
+					width:calc(100% - 90px);
+				}
+				&.icon{
+					width:20px;
+				}
+
+
+
+
+			}
+			.gv-ath-table-row__flag {
+			    display: inline-block;
+			    vertical-align: top;
+			    background-size: cover;
+			    background-position: center;
+			    width: 12px;
+			    height: 12px;
+			    margin: 3px 3px 0 1px;
+			    border-radius: 100px;
+
+			    &.color-Bronze{ border-color:$bronze; background-color:$bronze;  }
+				&.color-Silver{ border-color:$silver;  background-color:$silver;  }
+				&.color-Gold{ border-color:$gold;  background-color:$gold; }
+			}
+			.medalist-icon{
+				width:8px;
+				height:8px;
+				border-radius:100px;
+				background:#fff;
+				border:1px solid #CCC;
+				&.color-Bronze{ border-color:$bronze; background-color:$bronze;  }
+				&.color-Silver{ border-color:$silver;  background-color:$silver;  }
+				&.color-Gold{ border-color:$gold;  background-color:$gold; }
+			}
+			
+			
+		
 }

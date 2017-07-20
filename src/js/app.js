@@ -36,6 +36,45 @@ function addListeners(){
     })
 
 
+   document.querySelectorAll('.gv-ath-results__list-item').forEach(el => {
+           
+                el.addEventListener('click',function(e){
+                    let ref = this.getAttribute("data-id");
+
+                        document.querySelectorAll('.gv-ath-table').forEach(tableEl => {
+                            if(ref === tableEl.getAttribute("data-id")){
+                                tableEl.classList.remove("hide-el");
+                                tableEl.classList.add("show-el");
+                            }
+                        })
+
+                    
+
+                })
+    }); 
+
+
+
+   document.querySelectorAll('.gv-ath-day-event-title').forEach(el => {
+           
+                el.addEventListener('click',function(e){
+                    let ref = this.getAttribute("data-id");
+                    this.classList.add("day-expanded")
+                        document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
+                            if(ref === tableEl.getAttribute("data-id")){
+                                tableEl.classList.remove("hide-el");
+                                tableEl.classList.add("show-el");
+                            }
+                        })
+
+                    
+
+                })
+    }); 
+    
+
+
+
 }
 
 

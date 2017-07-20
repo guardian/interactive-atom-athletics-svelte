@@ -150,6 +150,8 @@
     padding: 0;
 }
 
+
+
 .om-table-row {
 	margin: 24px 0;
 
@@ -192,6 +194,7 @@
     &.om-results-row {
     	border-top: 1px solid $neutral-4;
     	padding-top:6px;
+
 		&:before {
 			border: none;
 			content: '';
@@ -199,8 +202,6 @@
 		}
 	}
 }
-
-	
 
 .om-table-left-area {
 	position: absolute;
@@ -234,7 +235,7 @@
     display: inline-block;
     font-weight: bold;
 	width: 32px;
-	padding: 0 6px 0 4px;
+	padding: 0 10px 0 10px;
 }
 
 .om-table-row__result-title {
@@ -371,5 +372,5 @@
 }
 
 .show-el{
-    display: block;
+    display: inline-block;
 }

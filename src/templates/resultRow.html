@@ -7,32 +7,22 @@
     {{#if result}}
     <div class="om-table-row__total">+</div>
 
-    <table class="om-result">
+    <table class="gv-ath-table">
         <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-               
-                <th></th>
-            </tr>
-            <tr class="om-result__subheaders">
-                <th></th>
-                <th></th>
+           
+            <tr class="gv-ath-table__subheaders">
+                <th>Place</th>
+                <th> </th>
                 <th>Athlete</th>
-               
-                <th class="om-entrant__header">Result</th>
+                <th>result</th>
+             
             </tr>
         </thead>
         <tbody>
             {{#each objArr}}
-            <tr class="om-entrant ">
-                <td>
-                    <div class="om-medal om-medal--gold">icon</div>
-                </td>
-                <td>
-                    <div class="om-flag om-flag--JAM"  style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>
-                </td>
+            <tr class="gv-ath-table-row">
+                <td>{{place}}.</td>
+                <td><span class="om-table-row__flag"  style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></span></td>
                 <td class="om-entrant__name" title="{{athlete}} ({{ISO}})">{{athlete}} ({{ISO}})</td>
                 
                 <td class="om-entrant__result">{{result}}</td>
