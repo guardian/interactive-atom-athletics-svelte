@@ -65,6 +65,13 @@ function addListeners() {
             })
     })
 
+    document.querySelector('#gv-ath-medal-by-country-selector').addEventListener('change', function(e) {
+        updateCountryView(e.target.value)
+        
+    })
+
+    
+
 }
 
 function initView(){
@@ -72,6 +79,17 @@ function initView(){
                 if(el.getAttribute("data-id") === "day-slice-1" ){
                     el.classList.remove("hide-el")
                 } 
+    })
+
+
+    updateCountryView("1")
+}
+
+function updateCountryView(n){
+    document.getElementById("section-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
+            el.classList.add("hidden-row")
+            if(el.getAttribute("data-position") == n){ el.classList.remove("hidden-row") }
+             
     })
 }
 

@@ -16,11 +16,30 @@
 </section>
 
 
+<section class="gv-slice-ux-section">
+    <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left">
+            <h3>Results and schedule</h3>
+        </div>
+        <div class="gv-slice-inner-main">
+            <div class="gv-ux-selector-left gv-no-border">
+                <div class="gv-ux-el">
+                    Showing
+                </div>
+                <select class="gv-team-list" id="gv-ath-medal-by-country-selector">
+                    {{#each medalsArr}}
+                    <option value="{{medal.position}}">{{objKey}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="gv-slice-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
-            <h3>Medals by country</h3>
+          
         </div>
         <div class="gv-slice-inner-main">
             <ol class="om-table js-table" id="section-medals-by-country">
