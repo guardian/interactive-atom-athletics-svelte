@@ -164,8 +164,11 @@ function getMedalsData(data){
                 if(item.medal === "Gold" ){ obj.medal.gold++ }
                 if(item.medal === "Silver" ){ obj.medal.silver++ }
                 if(item.medal === "Bronze" ){ obj.medal.bronze++ }
+                if(item.medal === "Gold" || item.medal === "Silver" || item.medal === "Bronze" ){  item.medalWin = true  }
             }) 
             obj.medal.total = obj.medal.gold + obj.medal.silver + obj.medal.bronze;
+
+            
        }) 
 
     maxMedal = getMaxMedal(a)
@@ -183,6 +186,7 @@ function getMedalsData(data){
                         "silver": obj.silver === 0 ? 0 : (obj.medal.silver/maxMedal)*7 + 3,
                         "gold": obj.gold === 0 ? 0 : (obj.medal.gold/maxMedal)*7 + 3
                     }
+        console.log(obj)
         pos ++; 
     })
 

@@ -19,7 +19,7 @@
 <section class="gv-slice-ux-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
-            <h3>Results and schedule</h3>
+            <h3>By country</h3>
         </div>
         <div class="gv-slice-inner-main">
             <div class="gv-ux-selector-left gv-no-border">
@@ -41,12 +41,35 @@
         <div class="gv-slice-inner-left">
           
         </div>
-        <div class="gv-slice-inner-main">
-            <ol class="om-table js-table" id="section-medals-by-country">
+        <div class="gv-slice-inner-main" id="slice-medals-by-country">
+            <ol class="om-table js-table" id="list-medals-by-country">
                 {{#each medalsArr}} 
                     {{> leaderRow }} 
                 {{/each}}
             </ol>
+
+            {{#each medalsArr}} 
+            <div class="gv-ath-wrapper hide-el" data-position="{{medal.position}}">
+                <div class="gv-ath-day-event-table">
+                                    {{#each objArr}}
+                                   {{#if medal}} <div class="gv-ath-day-event-table-row">
+                                    <div class="gv-ath-table-row__flag  color-{{medal}}" style="position:absolute; left:-36px"></div>
+                                    <div class="gv-ath-table-el place">
+
+                                    
+                                    {{place}}.</div>
+
+
+                                    <div class="gv-ath-table-el athlete"><div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div> {{athlete}} ({{ISO}})</div>
+                                  
+                                    <div class="gv-ath-table-el score">{{score}}</div>
+                                </div>{{/if}}
+                                {{/each}}
+                 </div>
+            </div>
+             {{/each}} 
+
+
             
         </div>
     </div>

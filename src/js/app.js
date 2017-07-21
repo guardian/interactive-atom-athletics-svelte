@@ -86,9 +86,15 @@ function initView(){
 }
 
 function updateCountryView(n){
-    document.getElementById("section-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
+    document.getElementById("list-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
             el.classList.add("hidden-row")
             if(el.getAttribute("data-position") == n){ el.classList.remove("hidden-row") }
+             
+    })
+
+    document.getElementById("slice-medals-by-country").querySelectorAll(".gv-ath-wrapper").forEach(el => {
+            el.classList.add("hide-el")
+            if(el.getAttribute("data-position") == n){ el.classList.remove("hide-el") }
              
     })
 }
