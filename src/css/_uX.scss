@@ -1,0 +1,81 @@
+.gv-ux-el{
+  width:100%;
+  font-family: "Guardian Text Sans Web", Helvetica, Arial, sans-serif;
+  font-size:14px;
+}
+
+.gv-ux-selector-left, .gv-ux-selector-right{
+    display: inline-block;
+    width:auto;
+    padding-left:10px;
+    padding-bottom:12px;
+}
+
+.gv-ux-selector-left{
+  border-right: 1px solid #FFF;
+  padding-left:0;
+  padding-right:10px;
+}
+
+.ux-inner-content{
+  margin-left:260px;
+}
+
+
+.gv-no-border{
+  border:none;
+}
+
+
+.gv-team-selector-container{
+	margin-left:20px;
+
+	@include mq(leftCol){
+		margin-left:140px;
+	}
+
+	@include mq(wide){
+		margin-left:240px;
+	}
+}
+
+
+.element-atom,
+.interactive-atom,
+.interactive-embed {
+    -webkit-font-smoothing:antialiased;
+    *{
+    	box-sizing:border-box;
+    }
+
+   
+
+    select{
+      width:100px;
+      height:24px;
+    	background: $neutral-6;
+    	border:1px solid $neutral-6;
+    	@include fs-textSans(3)
+    	color:#333;
+    
+    	border-radius:100px;
+    	padding:3px 21px 3px 12px;
+
+    	outline:none;
+  
+    	box-sizing:content-box;
+    	background-image: url('<%= path %>/assets/imgs/select-arrow.svg');
+    	background-repeat:no-repeat;
+    	background-position: center right 12px;
+    	-webkit-appearance: none;
+    	   -moz-appearance: none;
+    	   appearance: none;
+      &:disabled{
+         opacity:0.4;
+      }
+      @include mq(mobileLandscape){
+        width:110px;
+      }
+    }
+    
+}

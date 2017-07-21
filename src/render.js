@@ -124,7 +124,7 @@ function getDaysArr(data){
       
         obj.dayEventsArr = eventsArr;
         obj.dayNumber = k+1
-        console.log(obj.dayEventsArr[0])
+        //console.log(obj.dayEventsArr[0])
         // obj.timeFormat = obj.objArr[0].start_time.split(".").join(":");
         // obj.dataDate = obj.objArr[0].date.split(" ").join("_");
         // obj.gender = obj.objArr[0].sex;
@@ -148,8 +148,6 @@ function getDaysArr(data){
 
    return a
 }
-
-
 
 
 
@@ -187,8 +185,6 @@ function getMedalsData(data){
                     }
         pos ++; 
     })
-
-    
 
     return a;
 }

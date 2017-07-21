@@ -1,74 +1,61 @@
+<section class="gv-slice-section">
+    <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left">
+            <h3>Leaderboard</h3>
+        </div>
+        <div class="gv-slice-inner-main">
+            <ol class="om-table js-table" id="section-leaderboard">
+                {{#each medalsArr}} 
+                    {{> leaderRow }} 
+                {{/each}}
+            </ol>
+            <button class="js-leaderboard-button om-expand-button" id="medal-expand-button">All countries</button>
+            <button class="js-leaderboard-button om-collapse-button hide-el" id="medal-collapse-button">Hide countries</button>
+        </div>
+    </div>
+</section>
+
+
 
 <section class="gv-slice-section">
-        <!-- <div class="gv-section-bullet-wrapper main-list-bullet" section-ref="{{objKey}}">
-            <div class="gv-section-bullet">{{objKey}}</div>
-        </div> -->
-
-        <div class="gv-slice-inner">
+    <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
-        	<h3>Leaderboard</h3>
-        </div>	
-
-    	<div class="gv-slice-inner-main">
-			<ol class="om-table js-table" id="section-leaderboard">
-			{{#each medalsArr}}
-	        	{{> leaderRow }} 
-	        {{/each}}
-
-    	   </ol>	
-        <button class="js-leaderboard-button om-expand-button" id ="medal-expand-button">All countries</button>
-        <button class="js-leaderboard-button om-collapse-button hide-el" id ="medal-collapse-button">Hide countries</button>
-    	</div>	
+            <h3>Medals by country</h3>
+        </div>
+        <div class="gv-slice-inner-main">
+            <ol class="om-table js-table" id="section-medals-by-country">
+                {{#each medalsArr}} 
+                    {{> leaderRow }} 
+                {{/each}}
+            </ol>
             
         </div>
+    </div>
 </section>
 
 
 
-
-
-
-{{#each daysArr}}
-    {{> dayRow }} 
-{{/each}}   
-
-<section class="gv-slice-section" style="margin-top:500px">
-        <!-- <div class="gv-section-bullet-wrapper main-list-bullet" section-ref="{{objKey}}">
-            <div class="gv-section-bullet">{{objKey}}</div>
-        </div> -->
-
-        <div class="gv-slice-inner">
+<section class="gv-slice-ux-section">
+    <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
             <h3>Results and schedule</h3>
-        </div>  
-
-        <div class="gv-slice-inner-main">
-            <div class="gv-ux-holder">
-                <div class="gv-ux-left">
-
-                </div>  
-                
-                <div class="gv-ux-right">
-
-                </div>   
-            </div> 
-
-              
-            <ul class="om-table js-table section-results">
-                {{#each eventsArr}}
-                    {{> resultRow }} 
-                {{/each}} 
-            </ul> 
-
-        </div>  
-            
         </div>
+        <div class="gv-slice-inner-main">
+            <div class="gv-ux-selector-left gv-no-border">
+                <div class="gv-ux-el">
+                    Showing
+                </div>
+                <select class="gv-team-list" id="gv-ath-day-selector">
+                    {{#each daysArr}}
+                    <option value="day-slice-{{dayNumber}}">Day {{dayNumber}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+    </div>
 </section>
 
-
-<div class="om-date-schedule js-date-schedule is-expandable" data-startdate="2016-08-21">
-
-</div>  
-
-
+{{#each daysArr}} 
+    {{> dayRow }} 
+{{/each}}
 

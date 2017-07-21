@@ -310,10 +310,11 @@
 
 .js-leaderboard-button {
 
-	float: right;
+
 	background:none;
 	border-radius:30px;
 	height:30px;
+	width:130px;
 	border:1px solid #ccc;
 	font-family:$f-sans-serif-text;
 	padding-left:30px;
@@ -330,6 +331,7 @@
 	padding-bottom:0;
 	padding-top:0;
 	margin: 12px;
+	margin-left: calc(100% - 140px);
 	&.om-expand-button{
 		background-image:url('<%= path %>/assets/imgs/plus.svg');
 

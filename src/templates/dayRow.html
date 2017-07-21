@@ -1,7 +1,7 @@
-<section class="gv-slice-section" data-id="day-slice-{{dayNumber}}">
+<section class="gv-day-slice-section hide-el" data-id="day-slice-{{dayNumber}}">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
-            <h3>day {{dayNumber}}</h3>
+           
         </div>
         <div class="gv-slice-inner-main">
             <div class="gv-ux-holder">
@@ -20,8 +20,8 @@
                     </div>
 
                     <div class="gv-ath-day-event-table hide-el" data-id="{{objKey}}">
-                            {{#each objArr}}
-                            <div class="gv-ath-day-event-table-row">
+                                {{#each objArr}}
+                                <div class="gv-ath-day-event-table-row">
                                 {{#if medal}}<div class="gv-ath-table-row__flag  color-{{medal}}" style="position:absolute; left:-36px"></div>{{/if}}
                                 <div class="gv-ath-table-el place">
 
