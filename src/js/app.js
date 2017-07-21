@@ -32,6 +32,7 @@ function addListeners() {
         expandBtnEl.classList.remove('hide-el');
 
     })
+    
 
     document.querySelectorAll('.gv-ath-results__list-item').forEach(el => {
         el.addEventListener('click', function(e) {
