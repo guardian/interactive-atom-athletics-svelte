@@ -4,6 +4,7 @@ import rp from 'request-promise-native'
 import mainTemplate from './src/templates/main.html!text'
 import leaderRowTemplate from './src/templates/leaderRow.html!text'
 import resultRowTemplate from './src/templates/resultRow.html!text'
+import byCountryRowTemplate from './src/templates/byCountryRow.html!text'
 
 import dayRowTemplate from './src/templates/dayRow.html!text'
 import { groupBy } from './js/libs/arrayObjectUtils.js'
@@ -168,7 +169,8 @@ function getMedalsData(data){
             }) 
             obj.medal.total = obj.medal.gold + obj.medal.silver + obj.medal.bronze;
 
-            
+            obj.country = obj.objArr[0].country;
+
        }) 
 
     maxMedal = getMaxMedal(a)
@@ -217,7 +219,8 @@ function compileHTML(data) {
     Handlebars.registerPartial({
         'leaderRow': leaderRowTemplate,
         'resultRow': resultRowTemplate,
-        'dayRow' : dayRowTemplate
+        'dayRow' : dayRowTemplate,
+        'byCountryRow' : byCountryRowTemplate
     });
 
 

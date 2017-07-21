@@ -5,14 +5,24 @@
 	@include fs-textSans(3);
 	border-bottom:1px solid $neutral-3;
 	cursor:pointer;
+
+	&.by-country{
+				border: none;
+			}
+
 		.gv-ath-day-event-table{
 			position:relative;
 			margin: 12px 0 36px 60px;
 			width:100%;
 			color: $neutral-2;
 
-		}
+			&.by-country{
+				margin-top:60px;
+				margin-left: 36px;
+			
+			}
 
+		}
 
 		.gv-ath-day-event-title{
 			margin:6px 0;
@@ -64,6 +74,13 @@
 				}
 				&.icon{
 					width:20px;
+				}
+				&.date{
+					width:80px;
+				}
+
+				&.athlete-with-date{
+					width:calc(100% - 130px);
 				}
 
 

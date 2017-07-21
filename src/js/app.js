@@ -11,7 +11,7 @@ function addListeners() {
     var collapseButtonEl = document.querySelector('#medal-collapse-button');
 
     expandBtnEl.addEventListener('click', function(e) {
-        [].slice.apply(document.getElementsByClassName('om-table-row hidden-row')).forEach(el => {
+        [].slice.apply(document.getElementById('section-leaderboard').getElementsByClassName('om-table-row hidden-row')).forEach(el => {
             el.classList.remove('hidden-row');
             el.classList.add('showing-row');
 
@@ -23,7 +23,7 @@ function addListeners() {
     })
 
     collapseButtonEl.addEventListener('click', function(e) {
-        [].slice.apply(document.getElementsByClassName('om-table-row showing-row')).forEach(el => {
+        [].slice.apply(document.getElementById('section-leaderboard').getElementsByClassName('om-table-row showing-row')).forEach(el => {
             el.classList.remove('showing-row');
             el.classList.add('hidden-row');
         });

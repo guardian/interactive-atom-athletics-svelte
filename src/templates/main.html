@@ -28,7 +28,7 @@
                 </div>
                 <select class="gv-team-list" id="gv-ath-medal-by-country-selector">
                     {{#each medalsArr}}
-                    <option value="{{medal.position}}">{{objKey}}</option>
+                    <option value="{{medal.position}}">{{country}}</option>
                     {{/each}}
                 </select>
             </div>
@@ -49,24 +49,7 @@
             </ol>
 
             {{#each medalsArr}} 
-            <div class="gv-ath-wrapper hide-el" data-position="{{medal.position}}">
-                <div class="gv-ath-day-event-table">
-                                    {{#each objArr}}
-                                   {{#if medal}} <div class="gv-ath-day-event-table-row">
-                                    <div class="gv-ath-table-row__flag  color-{{medal}}" style="position:absolute; left:-36px"></div>
-                                    <div class="gv-ath-table-el place">
-
-                                    
-                                    {{place}}.</div>
-
-
-                                    <div class="gv-ath-table-el athlete"><div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div> {{athlete}} ({{ISO}})</div>
-                                  
-                                    <div class="gv-ath-table-el score">{{score}}</div>
-                                </div>{{/if}}
-                                {{/each}}
-                 </div>
-            </div>
+                   {{> byCountryRow }} 
              {{/each}} 
 
 
