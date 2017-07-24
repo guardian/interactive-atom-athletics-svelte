@@ -46,7 +46,7 @@ function addListeners() {
         })
     });
 
-    document.querySelectorAll('.gv-ath-day-event-title').forEach(el => {
+    document.querySelectorAll('.gv-ath-day-event-title-result').forEach(el => {
         el.addEventListener('click', function(e) {
             let ref = this.getAttribute("data-id");
             this.classList.add("day-expanded")

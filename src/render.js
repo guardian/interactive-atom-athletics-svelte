@@ -20,10 +20,10 @@ export async function render() {
 
     var dataObj = {};
 
-    let eventsArr = getEventsData(data)
+    let eventsArr = getEventsData(data.results)
     dataObj.eventsArr = eventsArr;
 
-    let medalsArr = getMedalsData(data)
+    let medalsArr = getMedalsData(data.results)
     dataObj.medalsArr = medalsArr;
 
     let daysArr = getDaysArr(data)
@@ -46,11 +46,11 @@ export async function loadData() {
 
 
 function formatData(data) {
-    let output = data.sheets.Sheet1;
-   
+    var newObj = {};
+    let results = data.sheets.results;   
     let count = 0;
 
-       output.map((obj) => {
+       results.map((obj) => {
             obj.ref = count;
             obj.athEvent = obj.sex+"_"+obj.event.split(" ").join("--")+"_"+obj.stage.split(" ").join("--");
             obj.score = obj.result;
@@ -58,12 +58,23 @@ function formatData(data) {
             if(obj.country == "Great Britain"){ obj.country = "United Kingdom" }
             obj.ISO = countryCode.getAlpha3Code(obj.country, 'en'); 
             obj.flag = obj.ISO.toLowerCase();
-
-
             count++;
-         })   
+         })  
 
-    return output;
+    let fixtures = data.sheets.fixtures;
+
+    count = 0;
+
+         fixtures.map((obj) => {
+            obj.ref = count;
+            obj.athEvent = obj.sex+"_"+obj.event.split(" ").join("--")+"_"+obj.stage.split(" ").join("--");
+            count++;
+         })
+
+    newObj.fixtures = fixtures;     
+    newObj.results = results;      
+
+    return newObj;
     
 }
 
@@ -93,13 +104,14 @@ function getEventsData(data){
         a = sortByKeys(a);
 
    a.map((obj) => { 
-        obj.timeFormat = obj.objArr[0].start_time.split(".").join(":");
+        obj.timeFormat = obj.objArr[0].start_time;
         obj.dataDate = obj.objArr[0].date.split(" ").join("_");
         obj.gender = obj.objArr[0].sex;
+        obj.stage = obj.objArr[0].stage;
         obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
         obj.formatTitle = obj.objArr[0].event+" "+obj.objArr[0].stage;
-        obj.objArr[0].result ? obj.result = true : obj.result = false; 
-
+        obj.objArr[0].result && obj.stage == "Final" ? obj.result = true : obj.result = false; 
+     
         if(obj.objArr[0].measure == "time" ){
             obj.objArr.sort((a, b) => (a.score - b.score))
         }else{
@@ -114,38 +126,46 @@ function getEventsData(data){
    return a
 }
 
+function getItemResults(item, results){
+
+    let t = item.athEvent.toLowerCase();
+    var tempArr = [];
+    results.map((obj, k) => { 
+        if (t === obj.athEvent.toLowerCase() ){tempArr.push(obj)}
+    })
+
+    tempArr.sort((a, b) => (a.result - b.date)) 
+    return tempArr;
+}
 
 
 function getDaysArr(data){
-    let a = groupBy(data, "date");
+    let a = groupBy(data.fixtures, "date");
         a = sortByKeys(a);
 
    a.map((obj, k) => { 
-        let eventsArr = getEventsData(obj.objArr)
-      
+        let eventsArr = getEventsData(obj.objArr);
         obj.dayEventsArr = eventsArr;
-        obj.dayNumber = k+1
-        //console.log(obj.dayEventsArr[0])
-        // obj.timeFormat = obj.objArr[0].start_time.split(".").join(":");
-        // obj.dataDate = obj.objArr[0].date.split(" ").join("_");
-        // obj.gender = obj.objArr[0].sex;
-        // obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
-        // obj.formatTitle = obj.objArr[0].event+" "+obj.objArr[0].stage;
-        // obj.objArr[0].result ? obj.result = true : obj.result = false; 
+        obj.date = new Date(obj.dayEventsArr[0].objArr[0].date);
+        obj.objArr.map((item, k) => { 
+            !item.result ? item.resultTable = null : item.resultTable = getItemResults(item, data.results);
+            //if(item.resultTable){ console.log(item.resultTable) }
+        })
 
-        // if(obj.objArr[0].measure == "time" ){
-        //     obj.objArr.sort((a, b) => (a.score - b.score))
-        // }else{
-        //     obj.objArr.sort((a, b) => (b.score - a.score))
-        // }
- 
-        // obj.objArr.map((athlete, k) => { 
-        //     athlete.place = k + 1;
-        // }) 
+
+
     }) 
 
+   
 
-    //console.log(a)
+    a.sort((a, b) => (a.date - b.date)) 
+
+
+    a.map((obj, k) => {
+        obj.dayNumber = k+1;
+        obj.formatDate = obj.objKey.split(" ")[0]+" "+obj.objKey.split(" ")[1];
+    })
+
 
    return a
 }
@@ -188,7 +208,7 @@ function getMedalsData(data){
                         "silver": obj.silver === 0 ? 0 : (obj.medal.silver/maxMedal)*7 + 3,
                         "gold": obj.gold === 0 ? 0 : (obj.medal.gold/maxMedal)*7 + 3
                     }
-        console.log(obj)
+
         pos ++; 
     })
 
