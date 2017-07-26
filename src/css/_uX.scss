@@ -1,7 +1,12 @@
 .gv-ux-el{
-  width:100%;
-  font-family: "Guardian Text Sans Web", Helvetica, Arial, sans-serif;
-  font-size:14px;
+  width:auto;
+  @include fs-textSans(3);
+  display:inline-block;
+
+  &.label{
+    margin-right:10px;
+    color: $neutral-3;
+  }
 }
 
 .gv-ux-selector-left, .gv-ux-selector-right{

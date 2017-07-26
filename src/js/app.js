@@ -49,13 +49,18 @@ function addListeners() {
     document.querySelectorAll('.gv-ath-day-event-title-result').forEach(el => {
         el.addEventListener('click', function(e) {
             let ref = this.getAttribute("data-id");
-            this.classList.add("day-expanded")
+            this.classList.add("day-expanded");
+            var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
+            closeBtn.classList.remove('open');
+            closeBtn.classList.add('close');
             document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
                 if (ref === tableEl.getAttribute("data-id")) {
                     tableEl.classList.remove("hide-el");
                     tableEl.classList.add("show-el");
                 }
             })
+
+            
         })
     });
 

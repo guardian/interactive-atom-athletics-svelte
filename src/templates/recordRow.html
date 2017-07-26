@@ -1,0 +1,14 @@
+
+<div class="gv-ath-wrapper-record">
+    <h4>{{strTitle}}</h4>
+    <div class="gv-ath-record-table">
+        {{#each objArr}}
+        <div class="gv-ath-record-row">
+            <div class="gv-ath-table-el event">{{sexStr}} {{formatEvent}}</div>
+            <div class="gv-ath-table-el score">{{result}}</div>
+            <div class="gv-ath-table-el athlete">{{athlete}}, {{formatDate}}, {{location}}</div>
+            
+        </div>
+        {{/each}}
+    </div>
+</div>

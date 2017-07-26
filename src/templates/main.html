@@ -1,6 +1,25 @@
 <section class="gv-slice-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
+            <h3>Records</h3>
+        </div>
+        <div class="gv-slice-inner-main">
+            
+            {{#each worldRecordsArr}} 
+                {{> recordRow }}                    
+            {{/each}} 
+
+            {{#each gamesRecordsArr}} 
+                {{> recordRow }}                    
+            {{/each}} 
+        </div>
+    </div>
+</section>
+
+
+<section class="gv-slice-section">
+    <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left">
             <h3>Leaderboard</h3>
         </div>
         <div class="gv-slice-inner-main">
@@ -23,7 +42,7 @@
         </div>
         <div class="gv-slice-inner-main">
             <div class="gv-ux-selector-left gv-no-border">
-                <div class="gv-ux-el">
+                <div class="gv-ux-el label">
                     Showing
                 </div>
                 <select class="gv-team-list" id="gv-ath-medal-by-country-selector">
@@ -67,14 +86,16 @@
         </div>
         <div class="gv-slice-inner-main">
             <div class="gv-ux-selector-left gv-no-border">
-                <div class="gv-ux-el">
+                <div class="gv-ux-el label">
                     Showing
                 </div>
+                <div class="gv-ux-el">
                 <select class="gv-team-list" id="gv-ath-day-selector">
                     {{#each daysArr}}
                     <option value="day-slice-{{dayNumber}}">Day {{dayNumber}} ({{formatDate}}) </option>
                     {{/each}}
                 </select>
+            </div>
             </div>
         </div>
     </div>

@@ -14,6 +14,7 @@ $bronzeLight : rgba($bronze, 0.7);
 
 @import "resultsBoard";
 @import "leaderBoard";
+@import "recordsBoard";
 @import "uX";
 
 
@@ -36,6 +37,10 @@ $bronzeLight : rgba($bronze, 0.7);
 
 }
 
+.gv-slice-section{
+	border-bottom:1px solid $neutral-4;
+}
+
 
 
 
@@ -43,7 +48,6 @@ $bronzeLight : rgba($bronze, 0.7);
 		padding: 10px 0;
 		width:100%;
 		position:relative;
-		margin-bottom:60px;
 
 
 
@@ -62,15 +66,12 @@ $bronzeLight : rgba($bronze, 0.7);
 				width:240px;
 			}
 
-			h3{
-				@include fs-header(3);
-			}
+			
 		}
 
 		.gv-slice-inner-main{
 			max-width:620px;
 			position:relative;
-			border-bottom: 1px solid $neutral-5;
 			padding-bottom:60px;
 			@include mq(leftCol){
 
@@ -82,7 +83,12 @@ $bronzeLight : rgba($bronze, 0.7);
 				margin-left:240px;
 			}
 		}
-	
+		h3{
+				@include fs-header(3);
+			}
+		h4{
+				@include fs-header(1);
+			}
 
 	}
 
