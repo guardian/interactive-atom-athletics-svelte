@@ -25,12 +25,17 @@
                                    {{#if resultTable}}   
                                     {{#each resultTable}}
                                         <div class="gv-ath-day-event-table-row">
-                                            {{#if medal}}<div class="gv-ath-table-row__flag  color-{{medal}}" style="position:absolute; left:-36px"></div>{{/if}}
-                                            <div class="gv-ath-table-el place">
-
                                             
-                                            {{place}}.</div>
+                                            <div class="gv-ath-table-el place">
+                                             
+                                            
+                                            {{#if medal}}<div class="gv-ath-table-row__flag  color-{{medal}}"></div>
+                                            {{else}}
+                                            {{place}}.
+                                            {{/if}}
 
+                                        </div>
+                                            
 
                                             <div class="gv-ath-table-el athlete"><div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div> {{athlete}} ({{ISO}})</div>
                                           

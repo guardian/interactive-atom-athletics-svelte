@@ -93,7 +93,6 @@ function formatData(data) {
         obj.formatEvent = getFormatEvent(obj.sex, obj.event);
     })
 
-
     newObj.records = records;
     newObj.fixtures = fixtures;
     newObj.results = results;
