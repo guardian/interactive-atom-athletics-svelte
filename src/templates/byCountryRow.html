@@ -2,11 +2,11 @@
                 <div class="gv-ath-day-event-table by-country">
                                 {{#each objArr}}
                                    {{#if medal}} <div class="gv-ath-day-event-table-row">
-                                    <div class="gv-ath-table-row__flag  color-{{medal}}" style="position:absolute; left:-36px"></div>
+                                    
                                     <div class="gv-ath-table-el date">{{formatDate}}</div>
 
-
-                                    <div class="gv-ath-table-el athlete-with-date">{{formatEvent}} {{athlete}}</div>
+                                    <div class="gv-ath-table-row__flag  color-{{medal}}"></div>
+                                    <div class="gv-ath-table-el athlete-with-date">{{sexStr}} {{formatEvent}} {{athlete}}</div>
                                   
                                     <div class="gv-ath-table-el score">{{score}}</div>
                                 </div>{{/if}}

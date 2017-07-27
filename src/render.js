@@ -33,11 +33,11 @@ export async function render() {
     let recordsArr = getOneDArr(data, "highlight")
     dataObj.recordsArr = recordsArr;
 
-    let worldRecordsArr = getRecordsArr(data, "world")
-    dataObj.worldRecordsArr = worldRecordsArr;
+    // let worldRecordsArr = getRecordsArr(data, "world")
+    // dataObj.worldRecordsArr = worldRecordsArr;
 
-    let gamesRecordsArr = getRecordsArr(data, "games")
-    dataObj.gamesRecordsArr = gamesRecordsArr;
+    // let gamesRecordsArr = getRecordsArr(data, "games")
+    // dataObj.gamesRecordsArr = gamesRecordsArr;
 
     var compiledHTML = compileHTML(dataObj);
 
@@ -133,6 +133,7 @@ function getEventsData(data) {
 
     a.map((obj) => {
         obj.timeFormat = obj.objArr[0].start_time;
+        obj.sortTime = obj.timeFormat.split(":").join("");
         obj.dataDate = obj.objArr[0].date.split(" ").join("_");
         obj.gender = obj.objArr[0].sex;
         obj.stage = obj.objArr[0].stage;
@@ -153,7 +154,7 @@ function getEventsData(data) {
         })
     })
 
-    a.sort((a, b) => (b.date - a.date))
+    a.sort((a, b) => (a.sortTime - b.sortTime))
 
     return a
 }
@@ -171,7 +172,7 @@ function getItemResults(item, results) {
 }
 
 function getOneDArr(data, series){
-       // console.log(data.records)
+
        let a = []
 
        let obj = {};
@@ -192,8 +193,6 @@ function getOneDArr(data, series){
                 if (item.country == "East Germany") { item.ISO = "DDR" }
                 if (item.country == "Czechoslovakia") { item.ISO = "TCH" }
 
-                //console.log(new Date(item.date))    
-                //if(item.resultTable){ console.log(item.resultTable) }
         })
        obj.objArr.sort((a, b) => (a.date - b.date))
 
@@ -224,7 +223,6 @@ function getRecordsArr(data, series){
                 if (item.country == "East Germany") { item.ISO = "DDR" }
                 if (item.country == "Czechoslovakia") { item.ISO = "TCH" }
 
-                //if(item.resultTable){ console.log(item.resultTable) }
             })
             
             obj.objArr = obj.objArr.filter(function(obj){
@@ -234,9 +232,6 @@ function getRecordsArr(data, series){
 
             
         })
-    
-        
-   console.log(series, a);
 
     return a;
     
@@ -250,12 +245,16 @@ function getDaysArr(data) {
     a.map((obj, k) => {
         let eventsArr = getEventsData(obj.objArr);
         obj.dayEventsArr = eventsArr;
-        obj.date = new Date(obj.dayEventsArr[0].objArr[0].date);
+        obj.date = new Date(obj.dayEventsArr[0].objArr[0].date+" "+obj.dayEventsArr[0].objArr[0].start_time);
+
         obj.objArr.map((item, k) => {
             !item.result ? item.resultTable = null : item.resultTable = getItemResults(item, data.results);
+            item.date = new Date(item.date+" "+item.start_time);
+            item.sortTime = item.start_time.split(":").join("");
 
-            //if(item.resultTable){ console.log(item.resultTable) }
         })
+        
+
     })
 
     a.sort((a, b) => (a.date - b.date))
@@ -263,6 +262,8 @@ function getDaysArr(data) {
     a.map((obj, k) => {
         obj.dayNumber = k + 1;
         obj.formatDate = getFormatDate(obj.objKey, "DD Mmm");
+        obj.objArr.sort((a, b) => b.sortTime - a.sortTime)
+        
     })
 
 
@@ -288,6 +289,8 @@ function getMedalsData(data) {
             if (item.medal === "Gold" || item.medal === "Silver" || item.medal === "Bronze") { item.medalWin = true }
             item.formatDate = getFormatDate(item.date, "DD Mmm");
             item.formatEvent = getFormatEvent(item.sex, item.event);
+            item.sex == "w" ? item.sexStr = "Women’s " :  item.sexStr = "Men’s ";
+            console.log(item)
 
         })
         obj.medal.total = obj.medal.gold + obj.medal.silver + obj.medal.bronze;
