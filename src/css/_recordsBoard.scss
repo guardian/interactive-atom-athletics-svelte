@@ -4,6 +4,7 @@
     }
 
 
+
 .gv-ath-wrapper-record {
     position: relative;
     display: inline-block;
@@ -16,13 +17,15 @@
 
     .gv-ath-record-table {
         position: relative;
-        margin: 12px 0 36px 0;
+        margin: 0 0 36px 0;
         width: 100%;
         color: $neutral-1;
         &.by-country {
             margin-top: 60px;
             margin-left: 36px;
         }
+
+
     }
     .gv-ath-day-event-title,
     .gv-ath-day-event-title-result {

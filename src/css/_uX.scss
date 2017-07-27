@@ -12,7 +12,7 @@
 .gv-ux-selector-left, .gv-ux-selector-right{
     display: inline-block;
     width:auto;
-    padding-left:10px;
+    padding-left:12px;
     padding-bottom:12px;
 }
 
@@ -44,6 +44,21 @@
 	}
 }
 
+.gv-key-el{
+  position:absolute;
+  top:0;
+  right:0;
+  margin-top:6px;
+}
+
+.key-icon{
+  margin: 3px 6px 0 12px !important;
+
+  &.plus{
+    background-image: url(./assets/imgs/plus.svg);
+    background-color:#FFF;
+  }
+}
 
 .element-atom,
 .interactive-atom,

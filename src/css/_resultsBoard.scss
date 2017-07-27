@@ -1,3 +1,21 @@
+    .gv-ath-record-row__flag {
+            display: inline-block;
+            vertical-align: top;
+            background-size: cover;
+            background-position: center;
+            background-color: #FFF;
+            width: 12px;
+            height: 12px;
+            margin: 3px 10px 0 2px;
+            border-radius: 100px;
+
+            &.final{
+               background-color: $neutral-1; 
+            }
+        }
+
+
+
 .gv-ath-wrapper {
     position: relative;
     width: 100%;
@@ -18,13 +36,18 @@
             margin-left: 36px;
         }
     }
+
+
+
+
+
     .gv-ath-day-event-title,
     .gv-ath-day-event-title-result {
         margin: 6px 0;
         .gv-ath-day-event-title-time {
             float: left;
             display: inline-block;
-            width: 80px;
+            width: 53px;
         }
         .gv-ath-day-event-title-main {
             width: auto;
@@ -58,6 +81,7 @@
         }
         &.score {
             text-align: right;
+            margin-left: 10px;
         }
         &.athlete {
             width: calc(100% - 108px);

@@ -33,27 +33,32 @@ $bronzeLight : rgba($bronze, 0.7);
 .gv-slice{
 	width:100%;
 	max-width:1300px;
-	padding-bottom:60px;
 
 }
 
 .gv-slice-section{
+	padding:  0 36px;
 	border-bottom:1px solid $neutral-4;
+	@include mq(tablet){
+			padding: 0 0 60px;
+		}
+}
+
+
+.gv-slice-ux-section{
+	padding: 12px 0 36px;
+
+	@include mq(tablet){
+			padding: 12px 0 24px;
+		}
 }
 
 
 
 
 .gv-slice-inner{
-		padding: 10px 0;
 		width:100%;
 		position:relative;
-
-
-
-		@include mq(tablet){
-			padding: 20px 0;
-		}
 
 		.gv-slice-inner-left{
 			width:100%;
@@ -72,10 +77,9 @@ $bronzeLight : rgba($bronze, 0.7);
 		.gv-slice-inner-main{
 			max-width:620px;
 			position:relative;
-			padding-bottom:60px;
 			@include mq(leftCol){
 
-				margin-left:140px;
+				margin-left:160px;
 
 			}
 

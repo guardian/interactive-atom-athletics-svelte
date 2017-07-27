@@ -159,14 +159,28 @@
 	padding-right: 20px;
 	position: relative;
 
+	&:first-child {
+		&:before {
+			border-top: 1px solid $neutral-4;
+			content: '';
+			margin: 0 auto 0 80px;
+			position: absolute;
+			top: 28%;
+			left: 0;
+			width: calc(100% - 80px);
+			z-index: 0;
+		}
+		
+	}
+
 	&:before {
-		border-top: 1px solid #ccc;
+		border-top: 1px solid $neutral-4;
 		content: '';
-		margin: 0 auto;
+		margin: 0 auto 0 80px;
 		position: absolute;
 		top: 50%;
 		left: 0;
-		width: 100%;
+		width: calc(100% - 80px);
 		z-index: 0;
 	}
 
@@ -235,7 +249,7 @@
     display: inline-block;
     font-weight: bold;
 	width: 32px;
-	padding: 0 10px 0 10px;
+	padding: 0 30px 0 7px; 
 }
 
 .om-table-row__result-title {
@@ -309,8 +323,6 @@
 }
 
 .js-leaderboard-button {
-
-
 	background:none;
 	border-radius:30px;
 	height:30px;
@@ -330,8 +342,8 @@
 	font-size:13px;
 	padding-bottom:0;
 	padding-top:0;
-	margin: 12px;
-	margin-left: calc(100% - 140px);
+
+	margin: 12px 0 0 calc(100% - 130px);
 	&.om-expand-button{
 		background-image:url('<%= path %>/assets/imgs/plus.svg');
 

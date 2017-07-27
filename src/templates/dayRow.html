@@ -4,19 +4,21 @@
            
         </div>
         <div class="gv-slice-inner-main">
-            <div class="gv-ux-holder">
-                <div class="gv-ux-left">
-                </div>
-                <div class="gv-ux-right">
-                </div>
-            </div>
+                   
+                    <div class="gv-ux-holder">
+                        <div class="gv-ux-left">
+                        </div>
+                        <div class="gv-ux-right">
+                        </div>
+                    </div>
             
 
                     {{#each dayEventsArr}}
                     <div class="gv-ath-wrapper">
                     <div class="gv-ath-day-event-title{{#if result}}-result{{/if}}" data-id="{{objKey}}">
-                        <div class="gv-ath-day-event-title-time" >{{timeFormat}}</div>   
-                        <div class="gv-ath-day-event-title-main" >{{gender}} {{formatTitle}}</div>
+                        <div class="gv-ath-day-event-title-time" >{{timeFormat}}</div>  
+
+                        <div class="gv-ath-day-event-title-main" ><div class="gv-ath-record-row__flag {{#if highlightEvent}}final{{/if}}"></div> {{gender}} {{formatTitle}}</div>
                         {{#if result}} <div class="gv-ath-table-row__close-btn open"  style=""></div> {{/if}}
                     </div>
 
@@ -55,4 +57,4 @@
 
 
 
-<!-- //style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"   <div class="gv-ath-table-el icon">{{#if medal}}<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>{{/if}}</div>-->
+

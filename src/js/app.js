@@ -48,11 +48,13 @@ function addListeners() {
 
     document.querySelectorAll('.gv-ath-day-event-title-result').forEach(el => {
         el.addEventListener('click', function(e) {
-            let ref = this.getAttribute("data-id");
-            this.classList.add("day-expanded");
-            var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
-            closeBtn.classList.remove('open');
-            closeBtn.classList.add('close');
+                let ref = this.getAttribute("data-id");
+                this.classList.add("day-expanded");
+
+                var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
+                    closeBtn.classList.remove('open');
+                    closeBtn.classList.add('close');
+                    
             document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
                 if (ref === tableEl.getAttribute("data-id")) {
                     tableEl.classList.remove("hide-el");
@@ -72,8 +74,7 @@ function addListeners() {
     })
 
     document.querySelector('#gv-ath-medal-by-country-selector').addEventListener('change', function(e) {
-        updateCountryView(e.target.value)
-        
+        updateCountryView(e.target.value)       
     })
 
     
@@ -86,22 +87,18 @@ function initView(){
                     el.classList.remove("hide-el")
                 } 
     })
-
-
     updateCountryView("1")
 }
 
 function updateCountryView(n){
     document.getElementById("list-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
             el.classList.add("hidden-row")
-            if(el.getAttribute("data-position") == n){ el.classList.remove("hidden-row") }
-             
+            if(el.getAttribute("data-position") == n){ el.classList.remove("hidden-row") }             
     })
 
     document.getElementById("slice-medals-by-country").querySelectorAll(".gv-ath-wrapper").forEach(el => {
             el.classList.add("hide-el")
-            if(el.getAttribute("data-position") == n){ el.classList.remove("hide-el") }
-             
+            if(el.getAttribute("data-position") == n){ el.classList.remove("hide-el") }            
     })
 }
 
