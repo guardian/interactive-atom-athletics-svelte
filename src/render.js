@@ -41,7 +41,7 @@ export async function render() {
     return compiledHTML;
 }
 
-// broke this out into a function so it could also be used in the gulpfile for the image resizing
+// broke this out into a function so it could also be used in the gulp file for the image resizing
 export async function loadData() {
     let data = formatData(await rp({
         uri: 'https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1oQ96A25xpbPSsD8Mck.json',
