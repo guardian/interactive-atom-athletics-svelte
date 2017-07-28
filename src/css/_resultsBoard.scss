@@ -1,18 +1,46 @@
-    .gv-ath-record-row__flag {
-            display: inline-block;
-            vertical-align: top;
-            background-size: cover;
-            background-position: center;
-            background-color: #FFF;
+.gv-ath-record-row__flag {
+        display: inline-block;
+        vertical-align: top;
+        background-size: cover;
+        background-position: center;
+        background-color: #FFF;
+        width: 12px;
+        height: 12px;
+        margin: 3px 15px 0 0;
+        border-radius: 100px;
+
+          &.final{
+            position:relative;
+            border-radius: 0;
             width: 12px;
             height: 12px;
-            margin: 3px 10px 0 2px;
-            border-radius: 100px;
-
-            &.final{
-               background-color: $neutral-1; 
-            }
+            background-color: #FFF;
         }
+            .top-circle, .left-circle, .right-circle {
+                position:absolute;
+                width:7px;
+                height:7px;
+                border-radius: 100px;
+                border: 1px solid #FFF; 
+            }
+
+           .top-circle{
+                top: 0;
+                left:3px;  
+                background-color: $gold;
+            }
+
+            .left-circle{
+                bottom: 0;
+                left:0;  
+                background-color: $silver;
+            }
+            .right-circle{
+                bottom: 0;
+                right:0;
+                background-color: $bronze;
+            }
+}
 
 .gv-ath-table-hl{
     font-weight:bold;
@@ -34,8 +62,15 @@
         margin: 12px 0 36px 0;
         width: 100%;
         color: $neutral-2;
+        
+
+        @include mq(tablet){
+            margin: 12px 0 36px 52px;
+            width: calc(100% - 52px);
+        }
         &.by-country {
-            margin-top: 60px;
+            margin: 60px 0 36px 0;
+            width: 100%;
         }
     }
 
@@ -79,23 +114,40 @@
         text-align: left;
         overflow: hidden;
         &.place {
-           width: 50px;  
+           width: 25px; 
+           padding-left: 3px; 
+        }
+        &.medal-place {
+           width: 28px; 
+           padding-left: 0; 
         }
         &.score {
+            position:absolute;
+            right:0;
             text-align: right;
             margin-left: 10px;
         }
         &.athlete {
-            width: calc(100% - 108px);
+            width: 100%;
+            @include mq(tablet){
+                max-width: 300px;
+            }
+        }
+        &.event {
+            width: 180px;
         }
         &.icon {
             width: 20px;
         }
         &.date {
-            width: 60px;
+            width: 50px;
+            float:left;
         }
-        &.athlete-with-date {
-            width: calc(100% - 144px);
+        &.athlete {
+            width: 100%;
+            @include mq(tablet){
+                max-width:300px;
+            }
         }
     }
     .gv-ath-table-row__flag {
@@ -105,11 +157,11 @@
         background-position: center;
         width: 12px;
         height: 12px;
-        margin: 3px 10px 0 1px;
+        margin: 3px 3px 0;
         border-radius: 100px;
         &.color-Bronze {
             border-color: $bronze;
-            background-color: $bronze;
+            background-color: $bronze;     
         }
         &.color-Silver {
             border-color: $silver;
@@ -119,7 +171,15 @@
             border-color: $gold;
             background-color: $gold;
         }
+         &.color-Gold, &.color-Silver, &.color-Bronze{
+            margin: 3px 14px 0 1px;
+        }
+
+        &.by-country{
+            margin: 3px 15px 0 3px;
+        }
     }
+
     .medalist-icon {
         width: 8px;
         height: 8px;
@@ -139,6 +199,7 @@
             background-color: $gold;
         }
     }
+
     .gv-ath-table-row__close-btn {
         position: absolute;
         top: 0;

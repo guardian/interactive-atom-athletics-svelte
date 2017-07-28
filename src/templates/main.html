@@ -1,38 +1,15 @@
+ {{#if recordsArr}}
 <section class="gv-slice-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
             <h3>Records</h3>
         </div>
         <div class="gv-slice-inner-main">
-            
-            {{#each recordsArr}} 
-                {{> recordRow }}                    
-            {{/each}} 
-
-            
+            {{#each recordsArr}} {{> recordRow }} {{/each}}
         </div>
     </div>
 </section>
-
-
-<section class="gv-slice-section">
-    <div class="gv-slice-inner">
-        <div class="gv-slice-inner-left" style="padding-top:12px">
-            <h3>Medals leaderboard</h3>
-        </div>
-        <div class="gv-slice-inner-main"  style="padding-top:12px">
-            <ol class="om-table js-table" id="section-leaderboard">
-                {{#each medalsArr}} 
-                    {{> leaderRow }} 
-                {{/each}}
-            </ol>
-            <button class="js-leaderboard-button om-expand-button" id="medal-expand-button">All countries</button>
-            <button class="js-leaderboard-button om-collapse-button hide-el" id="medal-collapse-button">Hide countries</button>
-        </div>
-    </div>
-</section>
-
-
+{{/if}}
 <section class="gv-slice-ux-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
@@ -52,31 +29,57 @@
         </div>
     </div>
 </section>
-
-<section class="gv-slice-section">
+<section class="gv-slice-section"  style="border:none;">
     <div class="gv-slice-inner">
-        <div class="gv-slice-inner-left">
-          
-        </div>
         <div class="gv-slice-inner-main" id="slice-medals-by-country">
-            <ol class="om-table js-table" id="list-medals-by-country">
-            {{#each medalsArr}} 
-                {{> leaderRow }} 
-            {{/each}}
+            <ol class="om-table js-table by-country" id="list-medals-by-country">
+                {{#each medalsArr}} {{> leaderRow }} {{/each}}
             </ol>
-
-            {{#each medalsArr}} 
-                {{> byCountryRow }} 
-            {{/each}} 
-
-
-            
+            {{#each medalsArr}} {{> byCountryRow }} {{/each}}
         </div>
     </div>
 </section>
 
+<section class="gv-slice-section">
+<div class="ad-section">
+        <div class="c-advert interactive-ad-banner">
+    <div class="ad-wrapper--desktop hide-until-tablet">
+        <div id="dfp-ad--inline210620171741"
+             class="js-ad-slot ad-slot ad-slot--banner-ad ad-slot--banner-ad-desktop"
+             data-link-name="ad slot banner"
+             data-name="banner"
+             data-tablet="1,1|2,2|728,90"
+             data-desktop="1,1|2,2|88,70|728,90|940,230|900,250"></div>
+    </div>
+
+    <div class="ad-wrapper--mobile mobile-only">
+        <div id="dfp-ad--inline210620171741Mobile"
+             class="js-ad-slot ad-slot ad-slot--inline ad-slot--inline210620171741"
+             data-link-name="ad slot inline210620171741Mobile"
+             data-name="inline21062017Mobile"
+             data-mobile="1,1|2,2|300,250|fluid"></div>
+    </div>
+</div>
+</div>
+</section>
 
 
+
+<section class="gv-slice-section">
+
+    <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left" style="padding-top:12px">
+            <h3>Medals leaderboard</h3>
+        </div>
+        <div class="gv-slice-inner-main" style="padding-top:12px">
+            <ol class="om-table js-table" id="section-leaderboard">
+                {{#each medalsArr}} {{> leaderRow }} {{/each}}
+            </ol>
+            <button class="js-leaderboard-button om-expand-button" id="medal-expand-button">All countries</button>
+            <button class="js-leaderboard-button om-collapse-button hide-el" id="medal-collapse-button">Hide countries</button>
+        </div>
+    </div>
+</section>
 <section class="gv-slice-ux-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
@@ -95,16 +98,15 @@
                     </select>
                 </div>
                 <div class="gv-ux-el gv-key-el">
-                    Key: <div class="gv-ath-record-row__flag final key-icon"></div> final  <div class="gv-ath-record-row__flag final key-icon plus"></div> result
-
-                </div>    
-
+                    <div class="gv-ath-record-row__flag final" style="margin-right: 6px;">
+                        <div class="top-circle"></div>
+                        <div class="left-circle"></div>
+                        <div class="right-circle"></div>
+                    </div> final
+                    <!-- <div class="gv-ath-record-row__flag final key-icon plus"></div> result -->
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-{{#each daysArr}} 
-    {{> dayRow }} 
-{{/each}}
-
+{{#each daysArr}} {{> dayRow }} {{/each}}

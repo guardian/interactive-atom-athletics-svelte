@@ -1,0 +1,61 @@
+$gs-baseline:12px;
+
+.ad-section{
+	width:100%;
+	max-width:728px;
+	background-color: #FFF;
+	margin: $gs-baseline 0 gs-height(1) 0;
+	margin-top: 48px;
+
+		@media(min-width:740px){
+			
+		}
+
+		@media(min-width:1140px){
+			margin-left:140px;
+		}
+
+		@media(min-width:1300px){
+			margin-left:240px;
+		}
+}
+
+
+
+.ad-wrapper--desktop{
+	display:none;
+	margin: 0 auto gs-height(1) auto;
+	z-index:5001 !important;
+
+	@include mq(tablet){
+		width:auto;
+		display:flex;
+		
+		padding: 0;
+	}
+
+	@include mq(desktop){
+		margin:0 auto;
+	}
+
+	@include mq(wide){
+		margin:0 auto;
+	}
+}
+
+
+
+.ad-wrapper--mobile{
+	
+	margin: 0 auto gs-height(1) auto;
+	//padding:  0 0 gs-height(1);
+	z-index:5000 !important;
+	display:flex;
+
+	@include mq(tablet){
+		display:none;
+	
+	}
+
+
+}

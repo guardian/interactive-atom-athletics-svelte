@@ -146,8 +146,14 @@
 .om-table {
 	@include fs-textSans(3);
 	list-style-type: none;
-    margin: 32px 0 0 0;
+    margin: 72px 0 0 0;
     padding: 0;
+    @include mq(leftCol){
+    	margin: 32px 0 0 0;
+    }
+    &.by-country{
+    	margin: 0;
+    }
 }
 
 
@@ -160,16 +166,16 @@
 	position: relative;
 
 	&:first-child {
-		&:before {
-			border-top: 1px solid $neutral-4;
-			content: '';
-			margin: 0 auto 0 80px;
-			position: absolute;
-			top: 28%;
-			left: 0;
-			width: calc(100% - 80px);
-			z-index: 0;
-		}
+		// &:before {
+		// 	border-top: 1px solid $neutral-4;
+		// 	content: '';
+		// 	margin: 0 auto 0 80px;
+		// 	position: absolute;
+		// 	top: 28%;
+		// 	left: 0;
+		// 	width: calc(100% - 80px);
+		// 	z-index: 0;
+		// }
 		
 	}
 
@@ -241,6 +247,7 @@
     background-position: center;
     width: 20px;
     height: 20px;
+    margin-right: 1px;
     border-radius: 100px;
 }
 
@@ -249,7 +256,7 @@
     display: inline-block;
     font-weight: bold;
 	width: 32px;
-	padding: 0 30px 0 7px; 
+	padding: 0 35px 0 7px; 
 }
 
 .om-table-row__result-title {

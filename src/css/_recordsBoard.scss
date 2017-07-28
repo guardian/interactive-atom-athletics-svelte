@@ -1,9 +1,7 @@
  .gv-ath-record-col{
         width:300px;
         display:inline;
-    }
-
-
+}
 
 .gv-ath-wrapper-record {
     position: relative;
@@ -12,8 +10,6 @@
     width: 100%;
     color: $neutral-1;
     @include fs-textSans(3);
-
-   
 
     .gv-ath-record-table {
         position: relative;
@@ -24,11 +20,9 @@
             margin-top: 60px;
             margin-left: 36px;
         }
-
-
     }
-    .gv-ath-day-event-title,
-    .gv-ath-day-event-title-result {
+
+    .gv-ath-day-event-title, .gv-ath-day-event-title-result {
         margin: 6px 0;
         .gv-ath-day-event-title-time {
             float: left;
@@ -39,40 +33,67 @@
             width: auto;
         }
     }
+
     .gv-ath-record-row {
         position: relative;
         width: 100%;
-        height: 33px;
+        height: auto;
         padding-top:3px;
         border-top: 1px dotted $neutral-3;
+     
+            @include mq(mobileLandscape){
+                max-width:460px;
+            }
+            @include mq(tablet){
+                max-width:620px;
+            }
     }
+
     .gv-ath-record-row:first-child {
         border-top: none;
     }
 
     .gv-ath-table-el {
         width: 40px; 
-        height:24px;
+        height:auto;
         display: inline-block;
         text-align: left;
         overflow: hidden;
 
-        &.event {
-            width:120px;
-            
-          
+        @include mq(tablet){
+            height: 24px;
         }
+
+        &.event {
+            width: auto;
+            max-width: 220px;
+            @include mq(tablet){
+                max-width:300px;
+            }
+        }
+
+        &.record-label{
+            width:100%;
+            @include mq(tablet){
+                width:80px;
+            }
+        }
+
         &.score { 
             width:60px;
-            font-weight: bold;
+            position:absolute;
+            right:0;
             color: $neutral-1;
-            text-align: left;
-           
-        }
-        &.athlete {
-            width: calc(100% - 270px);
             text-align: right;
         }
+
+        &.athlete { 
+            width: 100%;
+            @include mq(tablet){
+                width:250px;
+            }
+        }
+
         &.dark{
             color:$neutral-2;
         }
@@ -80,12 +101,18 @@
             width: 20px;
         }
         &.date {
-            width: 80px;
+            width: 100%;
+            @include mq(mobileLandscape){
+                width: 80px;
+                float: left;
+            }
+            
         }
         &.athlete-with-date {
             width: calc(100% - 130px);
         }
     }
+
     .gv-ath-table-row__flag {
         display: inline-block;
         vertical-align: top;
