@@ -87,6 +87,8 @@ function initView(){
                     el.classList.remove("hide-el")
                 } 
     })
+
+    document.getElementById('gv-ath-medal-by-country-selector').value = "1";
     updateCountryView("1")
 }
 
