@@ -24,7 +24,7 @@ export async function render() {
     let eventsArr = getEventsData(data.results)
     dataObj.eventsArr = eventsArr;
 
-    let medalsArr = getMedalsData(data.results)
+    let medalsArr = getMedalsData(data)
     dataObj.medalsArr = medalsArr;
 
     let daysArr = getDaysArr(data)
@@ -32,6 +32,9 @@ export async function render() {
 
     let recordsArr = getRecArr(data)
     dataObj.recordsArr = recordsArr;
+
+    let countriesArr = getCountriesArr(medalsArr)
+    dataObj.countriesArr = countriesArr;
 
     var compiledHTML = compileHTML(dataObj);
 
@@ -78,8 +81,55 @@ function formatData(data) {
         count++;
     })
 
-    let records = data.sheets.all_records;
+    let countries = data.sheets.countries_list;
 
+    countries.map((obj) => {
+     
+        if (obj.Country_Name == "United States") { obj.Country_Name = "United States of America" }
+        if (obj.Country_Name == "Great Britain" || obj.Country_Name == "Great Britain & N.I.") { obj.Country_Name = "United Kingdom" }
+        if (obj.Country_Name == "Antigua & Barbuda") { obj.Country_Name = "Antigua and Barbuda"}
+        if (obj.Country_Name == "Bosnia-Herzegovina") {  obj.Country_Name = "Bosnia and Herzegovina" }
+        if (obj.Country_Name == "British Virgin Islands") { obj.Country_Name = "Virgin Islands, British" }
+        if (obj.Country_Name == "Brunei") { obj.Country_Name = "Brunei Darussalam" }
+        if (obj.Country_Name == "Cabo Verde") { obj.Country_Name = "Cape Verde" }
+        if (obj.Country_Name == "Chinese Taipei") { obj.Country_Name = "Taiwan" }
+        if (obj.Country_Name == "Commonwealth Of Dominica") { obj.Country_Name = "Dominican Republic" }            
+        if (obj.Country_Name == "Dem. Rep. Of Sao Tome And Principe"){ obj.Country_Name ="Sao Tome and Principe" } 
+        if (obj.Country_Name == "Democ. Republic Of Congo" ){ obj.Country_Name ="Congo, the Democratic Republic of the" } 
+        if (obj.Country_Name == "Dpr Of Korea" ){ obj.Country_Name ="Korea, Democratic People's Republic of" }
+        if (obj.Country_Name == "East Timor" ){ obj.Country_Name = "Timor-Leste" }
+        if (obj.Country_Name == "F Y Rep. Of Macedonia" )  {  obj.Country_Name = "Macedonia, the Former Yugoslav Republic of" }
+        if (obj.Country_Name == "Hong Kong, China" )  {  obj.Country_Name = "Hong Kong" }
+        if (obj.Country_Name == "Islamic Republic Of Iran" )  {  obj.Country_Name = "Iran, Islamic Republic of" }
+        if (obj.Country_Name == "Kirghizistan" )  {  obj.Country_Name = "Kyrgyzstan" }
+        if (obj.Country_Name == "Kiribati Rep Of" )  {  obj.Country_Name = "Kiribati" }
+        if (obj.Country_Name == "Korea" ) {  obj.Country_Name = "Korea, Republic of" }
+        if (obj.Country_Name == "Laos" ) {  obj.Country_Name = "Lao People's Democratic Republic" }
+        if (obj.Country_Name == "Micronesia" ) {  obj.Country_Name = "Micronesia, Federated States of" }
+        if (obj.Country_Name == "Moldova" ) {  obj.Country_Name = "Moldova, Republic of" }
+        if (obj.Country_Name == "Palestine" ) {  obj.Country_Name = "Palestinian Territory, Occupied" }
+        if (obj.Country_Name == "Pr Of China" ) {  obj.Country_Name = "China" }
+        if (obj.Country_Name == "Rep Of Nauru - Pacific" ) {  obj.Country_Name = "Nauru" }
+        if (obj.Country_Name == "Rep Of Palau - Pacific" ) {  obj.Country_Name = "Palau" }
+        if (obj.Country_Name == "Republic Of Yemen" ) {  obj.Country_Name = "Yemen" }
+        if (obj.Country_Name == "Russia" ) {  obj.Country_Name = "Russian Federation" }
+        if (obj.Country_Name == "Saint Vincent" ) {  obj.Country_Name = "Saint Vincent and the Grenadines" }
+        if (obj.Country_Name == "Slovak Republic" ) {  obj.Country_Name = "Slovakia" }
+        if (obj.Country_Name == "Surinam" ) {  obj.Country_Name = "Suriname" }
+        if (obj.Country_Name == "Syria" ) {  obj.Country_Name = "Syrian Arab Republic" }
+        if (obj.Country_Name == "Tanzania" ) {  obj.Country_Name = "Tanzania, United Republic of" }
+        if (obj.Country_Name == "The Gambia" ) {  obj.Country_Name = "Gambia" }
+        if (obj.Country_Name == "Vietnam" ) {  obj.Country_Name = "Viet Nam" }
+        if (obj.Country_Name == "Virgin Islands" ) {  obj.Country_Name = "Virgin Islands, U.S." }
+            
+        if (obj.Country_Name == "Saint Vincent and the Grenadines" ) {  obj.ISO = "VCT" }
+        
+        else { obj.ISO = countryCode.getAlpha3Code(obj.Country_Name, 'en'); }
+        
+        obj.flag = obj.ISO.toLowerCase();      
+    })
+
+    let records = data.sheets.all_records;
     let records_highlight = data.sheets.highlighted_records;
 
     records = records.filter(function(obj){
@@ -92,6 +142,7 @@ function formatData(data) {
         obj.formatEvent = getFormatEvent(obj.sex, obj.event);
     })
 
+    newObj.countries = countries;
     newObj.records = records;
     newObj.records_highlight = records_highlight;
     newObj.fixtures = fixtures;
@@ -100,6 +151,57 @@ function formatData(data) {
     return newObj;
 
 }
+
+
+function getMedalsData(data) {
+
+    let a = groupBy(data.countries, "ISO");
+    a = sortByKeys(a);
+
+    a.map((obj) => {
+        
+        obj.medal = {};
+        obj.medal.gold = 0;
+        obj.medal.silver = 0;
+        obj.medal.bronze = 0;
+
+        data.results.map((item) => {
+            if (item.medal === "Gold" && item.country === obj.objArr[0].Country_Name) { obj.medal.gold++ }
+            if (item.medal === "Silver" && item.country === obj.objArr[0].Country_Name) { obj.medal.silver++ }
+            if (item.medal === "Bronze" && item.country === obj.objArr[0].Country_Name) { obj.medal.bronze++ }
+            //if (item.medal === "Gold"  && item.country === obj.objArr[0].Country_Name || item.medal === "Silver" && item.country === obj.objArr[0].Country_Name || item.medal === "Bronze"  && item.country === obj.objArr[0].Country_Name) { item.medalWin = true }
+            item.formatDate = getFormatDate(item.date, "DD Mmm");
+            item.formatEvent = getFormatEvent(item.sex, item.event);
+            item.sex == "w" ? item.sexStr = "Women’s " :  item.sexStr = "Men’s ";
+         }) 
+
+        obj.medal.total = obj.medal.gold + obj.medal.silver + obj.medal.bronze;
+        obj.country = obj.objArr[0].Country_Name;
+    })
+
+    maxMedal = getMaxMedal(a);
+
+    var pos = 1;
+
+    a.sort((a, b) => (b.medal.gold - a.medal.gold) || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze) || (b.objKey - a.objKey))
+
+    a.map((obj) => {
+       
+        obj.medal.position = pos;
+        obj.hidden = pos < 11 ? false : true
+        obj.circleSizes = {
+            "bronze": obj.bronze === 0 ? 0 : (obj.medal.bronze / maxMedal) * 7 + 3,
+            "silver": obj.silver === 0 ? 0 : (obj.medal.silver / maxMedal) * 7 + 3,
+            "gold": obj.gold === 0 ? 0 : (obj.medal.gold / maxMedal) * 7 + 3
+        }
+
+        pos++;
+    })
+
+    return a;
+}
+
+
 
 
 function sortByKeys(obj) {
@@ -139,10 +241,7 @@ function getEventsData(data) {
         if(obj.objArr[0].stage == "Final"){ obj.highlightEvent = true };
         obj.objArr[0].result && obj.stage == "Final" ? obj.result = true : obj.result = false;
 
-        //obj.objArr.sort((a, b) => (a.score - b.score))
-
-        if (obj.objArr[0].measure == "time") { obj.objArr.sort((a, b) => (a.score - b.score)) } else {
-            
+        if (obj.objArr[0].measure == "time") { obj.objArr.sort((a, b) => (a.score - b.score)) } else {            
             obj.objArr.sort((a, b) => (a.score - b.score))
         }
 
@@ -325,65 +424,36 @@ function getDaysArr(data) {
         
     })
 
-
-
     return a
+
 }
 
+function getCountriesArr(medalsArr){
 
-function getMedalsData(data) {
-    let a = groupBy(data, "ISO");
-    a = sortByKeys(a);
+   var a = []
 
-    a.map((obj) => {
-        obj.medal = {};
-        obj.medal.gold = 0;
-        obj.medal.silver = 0;
-        obj.medal.bronze = 0;
-
-        obj.objArr.map((item) => {
-            if (item.medal === "Gold") { obj.medal.gold++ }
-            if (item.medal === "Silver") { obj.medal.silver++ }
-            if (item.medal === "Bronze") { obj.medal.bronze++ }
-            if (item.medal === "Gold" || item.medal === "Silver" || item.medal === "Bronze") { item.medalWin = true }
-            item.formatDate = getFormatDate(item.date, "DD Mmm");
-            item.formatEvent = getFormatEvent(item.sex, item.event);
-            item.sex == "w" ? item.sexStr = "Women’s " :  item.sexStr = "Men’s ";
-
-        })
-        obj.medal.total = obj.medal.gold + obj.medal.silver + obj.medal.bronze;
-
-        obj.country = obj.objArr[0].country;
-
+    medalsArr.map((item) => {
+        var o = {};
+        o.country = item.country;
+        o.position = item.medal.position;
+        a.push (o)
     })
 
-    maxMedal = getMaxMedal(a)
 
+    //unicode sort
+    a.sort(function(a, b) {
+       return a.country.localeCompare(b.country);
+    });
 
-    var pos = 1;
-
-    a.sort((a, b) => (b.medal.gold - a.medal.gold) || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze) || (b.objKey - a.objKey))
-
-    a.map((obj) => {
-        obj.medal.position = pos;
-        obj.hidden = pos < 11 ? false : true
-        obj.circleSizes = {
-            "bronze": obj.bronze === 0 ? 0 : (obj.medal.bronze / maxMedal) * 7 + 3,
-            "silver": obj.silver === 0 ? 0 : (obj.medal.silver / maxMedal) * 7 + 3,
-            "gold": obj.gold === 0 ? 0 : (obj.medal.gold / maxMedal) * 7 + 3
-        }
-
-        pos++;
-    })
 
     return a;
 }
+
 
 function getShortEvent(s){
     s = s.replace(/ metres/g, 'm');
     return s;
 }
-
 
 
 function getFormatDate(d, f){
@@ -401,10 +471,6 @@ function getFormatEvent(sex, event){
         if (sex == "null"){ str = evStr };
         if (sex == "m"){ str = "Men\u2019s "+evStr };
         if (sex == "w"){ str = "Women\u2019s "+evStr };
-
-    
-
-
 
     return evStr;
 
@@ -447,14 +513,9 @@ function compileHTML(data) {
 
     var newHTML = content(data);
 
-    return newHTML
+    return newHTML;
+
 }
-
-
-
-
-
-
 
 
 

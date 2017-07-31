@@ -145,6 +145,7 @@
         }
         &.athlete {
             width: 100%;
+            max-width:200px;
             @include mq(tablet){
                 max-width:300px;
             }
