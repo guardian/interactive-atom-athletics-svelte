@@ -1,7 +1,7 @@
 <div class="gv-ath-wrapper by-country hide-el" data-position="{{medal.position}}">
                 <div class="gv-ath-day-event-table by-country">
-                                {{#each objArr}}
-                                   {{#if medal}} 
+                                {{#each medallists}}
+                                   
                                    <div class="gv-ath-day-event-table-row">                                    
 
                                     <div class="gv-ath-table-row__flag  color-{{medal}} by-country"></div>
@@ -11,7 +11,7 @@
                                     <div class="gv-ath-table-el event">{{sexStr}} {{formatEvent}}</div>
                                   
                                     <div class="gv-ath-table-el score">{{score}}</div>
-                                </div>{{/if}}
+                                </div>
                                 {{/each}}
                  </div>
             </div>
