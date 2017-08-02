@@ -46,7 +46,7 @@
 
 .gv-key-el{
     position:relative;
-    margin:12px 0 0;
+    margin:12px 12px 0 0;
 
     @include mq(tablet){
       position:absolute;
@@ -105,4 +105,15 @@
       }
     }
     
+}
+
+.gv-expanding-wrapper:after {
+    position: absolute;
+    bottom: 40px;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+    content: '';
+    display: block;
+    width: 100%;
+    // border-bottom: 1px solid #CCC;
 }

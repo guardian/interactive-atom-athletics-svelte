@@ -205,13 +205,33 @@
         height: 12px;
         margin: 3px 3px 0 1px;
         vertical-align: top;
+        color: $neutral-2;
+
+        &:hover{
+           color:$news-main-1;
+           text-decoration: underline;
+        }
 
         &.close {
         	background-image:url('<%= path %>/assets/imgs/plus.svg');
         	transform: rotate(45deg);
+            right: 0;  
+
         }
         &.open{
         	background-image:url('<%= path %>/assets/imgs/plus.svg');     
+        }
+        &.gv-ath-table-url{
+            margin: 0;
+            width:70px;
+            right: 0;   
+            
+        }
+        &.gv-ath-table-text{
+            margin: 0;
+            width:70px; 
+            right: 0;    
+            
         }
         
         background-size: cover;

@@ -333,9 +333,11 @@
 	background:none;
 	border-radius:30px;
 	height:30px;
-	width:130px;
+	width:120px;
 	border:1px solid #ccc;
-	font-family:$f-sans-serif-text;
+	@include fs-textSans(3);
+	line-height:15px;
+	text-align:left;
 	padding-left:30px;
 	padding-right:12px;
 	color:#767676;

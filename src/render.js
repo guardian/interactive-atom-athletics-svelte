@@ -16,6 +16,8 @@ import countryCode from 'i18n-iso-countries'
 
 let maxMedal;
 
+let IAAFstem = "http://www.iaafworldchampionships.com/events/";
+
 export async function render() {
     let data = await loadData();
 
@@ -83,54 +85,12 @@ function formatData(data) {
 
     let countries = data.sheets.countries_list;
 
-    countries.map((obj) => {
-        if (obj.Country_Name == "United States") { obj.Country_Name = "United States of America" }
-        if (obj.Country_Name == "Great Britain" || obj.Country_Name == "Great Britain & N.I.") { obj.Country_Name = "United Kingdom" }
-        if (obj.Country_Name == "Antigua & Barbuda") { obj.Country_Name = "Antigua and Barbuda" }
-        if (obj.Country_Name == "Bosnia-Herzegovina") { obj.Country_Name = "Bosnia and Herzegovina" }
-        if (obj.Country_Name == "British Virgin Islands") { obj.Country_Name = "Virgin Islands, British" }
-        if (obj.Country_Name == "Brunei") { obj.Country_Name = "Brunei Darussalam" }
-        if (obj.Country_Name == "Cabo Verde") { obj.Country_Name = "Cape Verde" }
-        if (obj.Country_Name == "Chinese Taipei") { obj.Country_Name = "Taiwan" }
-        if (obj.Country_Name == "Commonwealth Of Dominica") { obj.Country_Name = "Dominican Republic" }
-        if (obj.Country_Name == "Dem. Rep. Of Sao Tome And Principe") { obj.Country_Name = "Sao Tome and Principe" }
-        if (obj.Country_Name == "Democ. Republic Of Congo") { obj.Country_Name = "Congo, the Democratic Republic of the" }
-        if (obj.Country_Name == "Dpr Of Korea") { obj.Country_Name = "Korea, Democratic People's Republic of" }
-        if (obj.Country_Name == "East Timor") { obj.Country_Name = "Timor-Leste" }
-        if (obj.Country_Name == "F Y Rep. Of Macedonia") { obj.Country_Name = "Macedonia, the Former Yugoslav Republic of" }
-        if (obj.Country_Name == "Hong Kong, China") { obj.Country_Name = "Hong Kong" }
-        if (obj.Country_Name == "Islamic Republic Of Iran") { obj.Country_Name = "Iran, Islamic Republic of" }
-        if (obj.Country_Name == "Kirghizistan") { obj.Country_Name = "Kyrgyzstan" }
-        if (obj.Country_Name == "Kiribati Rep Of") { obj.Country_Name = "Kiribati" }
-        if (obj.Country_Name == "Korea") { obj.Country_Name = "Korea, Republic of" }
-        if (obj.Country_Name == "Laos") { obj.Country_Name = "Lao People's Democratic Republic" }
-        if (obj.Country_Name == "Micronesia") { obj.Country_Name = "Micronesia, Federated States of" }
-        if (obj.Country_Name == "Moldova") { obj.Country_Name = "Moldova, Republic of" }
-        if (obj.Country_Name == "Palestine") { obj.Country_Name = "Palestinian Territory, Occupied" }
-        if (obj.Country_Name == "Pr Of China") { obj.Country_Name = "China" }
-        if (obj.Country_Name == "Rep Of Nauru - Pacific") { obj.Country_Name = "Nauru" }
-        if (obj.Country_Name == "Rep Of Palau - Pacific") { obj.Country_Name = "Palau" }
-        if (obj.Country_Name == "Republic Of Yemen") { obj.Country_Name = "Yemen" }
-        if (obj.Country_Name == "Russia") { obj.Country_Name = "Russian Federation" }
-        if (obj.Country_Name == "Saint Vincent") { obj.Country_Name = "Saint Vincent and the Grenadines" }
-        if (obj.Country_Name == "Slovak Republic") { obj.Country_Name = "Slovakia" }
-        if (obj.Country_Name == "Surinam") { obj.Country_Name = "Suriname" }
-        if (obj.Country_Name == "Syria") { obj.Country_Name = "Syrian Arab Republic" }
-        if (obj.Country_Name == "Tanzania") { obj.Country_Name = "Tanzania, United Republic of" }
-        if (obj.Country_Name == "The Gambia") { obj.Country_Name = "Gambia" }
-        if (obj.Country_Name == "Vietnam") { obj.Country_Name = "Viet Nam" }
-        if (obj.Country_Name == "Virgin Islands") { obj.Country_Name = "Virgin Islands, U.S." }
+    countries = getCountryNames (countries);
 
-        if (obj.Country_Name == "Saint Vincent and the Grenadines") { obj.ISO = "VCT" } else { obj.ISO = countryCode.getAlpha3Code(obj.Country_Name, 'en'); }
-
-        obj.flag = obj.ISO.toLowerCase();
-    })
-
-    let records = data.sheets.all_records;
-    let records_highlight = data.sheets.highlighted_records;
+    let records = data.sheets.results;
 
     records = records.filter(function(obj) {
-        return obj.highlight;
+        return obj.record;
     });
 
     records.map((obj) => {
@@ -141,7 +101,6 @@ function formatData(data) {
 
     newObj.countries = countries;
     newObj.records = records;
-    newObj.records_highlight = records_highlight;
     newObj.fixtures = fixtures;
     newObj.results = results;
 
@@ -150,11 +109,60 @@ function formatData(data) {
 }
 
 
+function getCountryNames(countries){
+
+    countries.map((obj) => {
+
+            if (obj.Country_Name == "United States") { obj.Country_Name = "United States of America" }
+            if (obj.Country_Name == "Great Britain" || obj.Country_Name == "Great Britain & N.I.") { obj.Country_Name = "United Kingdom" }
+            if (obj.Country_Name == "Antigua & Barbuda") { obj.Country_Name = "Antigua and Barbuda" }
+            if (obj.Country_Name == "Bosnia-Herzegovina") { obj.Country_Name = "Bosnia and Herzegovina" }
+            if (obj.Country_Name == "British Virgin Islands") { obj.Country_Name = "Virgin Islands, British" }
+            if (obj.Country_Name == "Brunei") { obj.Country_Name = "Brunei Darussalam" }
+            if (obj.Country_Name == "Cabo Verde") { obj.Country_Name = "Cape Verde" }
+            if (obj.Country_Name == "Chinese Taipei") { obj.Country_Name = "Taiwan" }
+            if (obj.Country_Name == "Commonwealth Of Dominica") { obj.Country_Name = "Dominican Republic" }
+            if (obj.Country_Name == "Dem. Rep. Of Sao Tome And Principe") { obj.Country_Name = "Sao Tome and Principe" }
+            if (obj.Country_Name == "Democ. Republic Of Congo") { obj.Country_Name = "Congo, the Democratic Republic of the" }
+            if (obj.Country_Name == "Dpr Of Korea") { obj.Country_Name = "Korea, Democratic People's Republic of" }
+            if (obj.Country_Name == "East Timor") { obj.Country_Name = "Timor-Leste" }
+            if (obj.Country_Name == "F Y Rep. Of Macedonia") { obj.Country_Name = "Macedonia, the Former Yugoslav Republic of" }
+            if (obj.Country_Name == "Hong Kong, China") { obj.Country_Name = "Hong Kong" }
+            if (obj.Country_Name == "Islamic Republic Of Iran") { obj.Country_Name = "Iran, Islamic Republic of" }
+            if (obj.Country_Name == "Kirghizistan") { obj.Country_Name = "Kyrgyzstan" }
+            if (obj.Country_Name == "Kiribati Rep Of") { obj.Country_Name = "Kiribati" }
+            if (obj.Country_Name == "Korea") { obj.Country_Name = "Korea, Republic of" }
+            if (obj.Country_Name == "Laos") { obj.Country_Name = "Lao People's Democratic Republic" }
+            if (obj.Country_Name == "Micronesia") { obj.Country_Name = "Micronesia, Federated States of" }
+            if (obj.Country_Name == "Moldova") { obj.Country_Name = "Moldova, Republic of" }
+            if (obj.Country_Name == "Palestine") { obj.Country_Name = "Palestinian Territory, Occupied" }
+            if (obj.Country_Name == "Pr Of China") { obj.Country_Name = "China" }
+            if (obj.Country_Name == "Rep Of Nauru - Pacific") { obj.Country_Name = "Nauru" }
+            if (obj.Country_Name == "Rep Of Palau - Pacific") { obj.Country_Name = "Palau" }
+            if (obj.Country_Name == "Republic Of Yemen") { obj.Country_Name = "Yemen" }
+            if (obj.Country_Name == "Russia") { obj.Country_Name = "Russian Federation" }
+            if (obj.Country_Name == "Saint Vincent") { obj.Country_Name = "Saint Vincent and the Grenadines" }
+            if (obj.Country_Name == "Slovak Republic") { obj.Country_Name = "Slovakia" }
+            if (obj.Country_Name == "Surinam") { obj.Country_Name = "Suriname" }
+            if (obj.Country_Name == "Syria") { obj.Country_Name = "Syrian Arab Republic" }
+            if (obj.Country_Name == "Tanzania") { obj.Country_Name = "Tanzania, United Republic of" }
+            if (obj.Country_Name == "The Gambia") { obj.Country_Name = "Gambia" }
+            if (obj.Country_Name == "Vietnam") { obj.Country_Name = "Viet Nam" }
+            if (obj.Country_Name == "Virgin Islands") { obj.Country_Name = "Virgin Islands, U.S." }
+            if (obj.Country_Name == "Saint Vincent and the Grenadines") { obj.ISO = "VCT" } else { obj.ISO = countryCode.getAlpha3Code(obj.Country_Name, 'en'); }
+
+            obj.flag = obj.ISO.toLowerCase();
+
+    })
+
+    return countries;
+}
+
+
 function getMedalsData(data) {
 
     let a = groupBy(data.countries, "ISO");
     a = sortByKeys(a);
-
 
     a.map((obj) => {
 
@@ -225,6 +233,7 @@ function sortByKeys(obj) {
     return a;
 }
 
+
 function getEventsData(data) {
     let a = groupBy(data, "athEvent");
     a = sortByKeys(a);
@@ -235,7 +244,8 @@ function getEventsData(data) {
         obj.dataDate = obj.objArr[0].date.split(" ").join("_");
         obj.gender = obj.objArr[0].sex.toLowerCase();
         obj.stage = obj.objArr[0].stage;
-
+        obj.iaaf_url = IAAFstem+obj.objArr[0].event_id ;
+        console.log(obj);
         obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
         obj.formatTitle = obj.objArr[0].event + " " + obj.objArr[0].stage;
 
@@ -257,7 +267,6 @@ function getEventsData(data) {
 }
 
 function getItemResults(item, results) {
-
 
     let t = item.athEvent.toLowerCase();
 
@@ -333,8 +342,6 @@ function getOneDArr(data, series) {
 
         item.ISO = countryCode.getAlpha3Code(item.country, 'en');
 
-
-
         if (item.country == "East Germany") { item.ISO = "DDR" }
         if (item.country == "Czechoslovakia") { item.ISO = "TCH" }
 
@@ -392,6 +399,9 @@ function getDaysArr(data) {
         let eventsArr = getEventsData(obj.objArr);
         obj.dayEventsArr = eventsArr;
         obj.date = new Date(obj.dayEventsArr[0].objArr[0].date + " " + obj.dayEventsArr[0].objArr[0].start_time);
+
+
+
 
         obj.objArr.map((item, k) => {
             if (item.result) {

@@ -6,30 +6,45 @@ function init() {
 }
 
 
+function getH(id)
+{
+    return document.getElementById(id).offsetHeight;
+}
+
 function addListeners() {
     var expandBtnEl = document.querySelector('#medal-expand-button');
     var collapseButtonEl = document.querySelector('#medal-collapse-button');
+    let initialHeight = 460;
+    let divHeight = initialHeight;
+    let jump = 850;
+    let maxH = getH('section-leaderboard');
 
     expandBtnEl.addEventListener('click', function(e) {
-        [].slice.apply(document.getElementById('section-leaderboard').getElementsByClassName('om-table-row hidden-row')).forEach(el => {
-            el.classList.remove('hidden-row');
-            el.classList.add('showing-row');
+        if(divHeight < maxH){
+            divHeight += jump;  
+        }
 
-        });
-
-        collapseButtonEl.classList.remove('hide-el');
-        expandBtnEl.classList.add('hide-el');
+        if(divHeight > maxH){
+            divHeight =  maxH;
+            collapseButtonEl.classList.add('show-el');
+            expandBtnEl.classList.remove('show-el');
+            expandBtnEl.classList.add('hide-el');
+        }     
+        document.getElementById('expandingWrapper').style.height = divHeight+ "px";
 
     })
 
     collapseButtonEl.addEventListener('click', function(e) {
-        [].slice.apply(document.getElementById('section-leaderboard').getElementsByClassName('om-table-row showing-row')).forEach(el => {
-            el.classList.remove('showing-row');
-            el.classList.add('hidden-row');
-        });
+        document.getElementById('expandingWrapper').style.height = initialHeight+ "px";
 
+        let scrollEl = document.getElementById("leaderBoardSlice")
+
+        scrollEl.scrollIntoView(true);
+
+        collapseButtonEl.classList.remove('show-el');
         collapseButtonEl.classList.add('hide-el');
         expandBtnEl.classList.remove('hide-el');
+        expandBtnEl.classList.add('show-el');
 
     })
     
@@ -55,14 +70,21 @@ function addListeners() {
                     closeBtn.classList.remove('open');
                     closeBtn.classList.add('close');
                     
-            document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
-                if (ref === tableEl.getAttribute("data-id")) {
-                    tableEl.classList.remove("hide-el");
-                    tableEl.classList.add("show-el");
-                }
-            })
+                document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
+                    if (ref === tableEl.getAttribute("data-id")) {
+                        tableEl.classList.remove("hide-el");
+                        tableEl.classList.add("show-el");
+                    }
+                })
 
             
+        })
+    });
+
+    document.querySelectorAll('.gv-ath-table-url').forEach(el => {
+        el.addEventListener('click', function(e) {
+            let ref = this.getAttribute("url-data");
+            window.open(ref);
         })
     });
 

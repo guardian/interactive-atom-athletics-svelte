@@ -156,7 +156,8 @@ gulp.task('_build', ['clean'], cb => {
 // TODO: less hacky build/_build?
 gulp.task('build', ['_build'], () => {
     return gulp.src(`${buildDir}/**/!(*.map)`)
-        .pipe(size({'gzip': true, 'showFiles': true}))
+     // log out file sizes
+     //   .pipe(size({'gzip': true, 'showFiles': true}))
 });
 
 gulp.task('deploy', ['build'], cb => {

@@ -1,15 +1,20 @@
- {{#if recordsArr}}
+ 
+
+{{#if recordsArr}}
 <section class="gv-slice-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
             <h3>Records</h3>
         </div>
         <div class="gv-slice-inner-main">
-            {{#each recordsArr}} {{> recordRow }} {{/each}}
+            {{#each recordsArr}} 
+                {{> recordRow }} 
+            {{/each}}
         </div>
     </div>
 </section>
 {{/if}}
+
 <section class="gv-slice-ux-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
@@ -29,7 +34,8 @@
         </div>
     </div>
 </section>
-<section class="gv-slice-section"  style="border:none;">
+
+<section class="gv-slice-section" >
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-main" id="slice-medals-by-country">
             <ol class="om-table js-table by-country" id="list-medals-by-country">
@@ -37,6 +43,30 @@
             </ol>
                 {{#each medalsArr}} {{> byCountryRow }} {{/each}}
         </div>
+    </div>
+</section>
+
+
+<section class="gv-slice-section"  style="border:none;" id="leaderBoardSlice">
+
+    <div class="gv-slice-inner">
+        <div class="gv-slice-inner-left" style="padding-top:12px">
+            <h3>Medals leaderboard</h3>
+        </div>
+        <div class="gv-slice-inner-main" style="padding-top:12px">
+           <div class="gv-expanding-wrapper"  style="height:600px; overflow:hidden;" id="expandingWrapper">
+                <ol class="om-table js-table" id="section-leaderboard">
+                    {{#each medalsArr}} {{> leaderRow }} {{/each}}
+                </ol>
+            </div>
+
+            <div class="gv-button-holder">
+                <button class="js-leaderboard-button om-expand-button" id="medal-expand-button">Show more</button>
+                <button class="js-leaderboard-button om-collapse-button hide-el" id="medal-collapse-button">Show less</button>
+            </div>
+            
+        </div>
+
     </div>
 </section>
 
@@ -64,22 +94,6 @@
 </section>
 
 
-
-<section class="gv-slice-section">
-
-    <div class="gv-slice-inner">
-        <div class="gv-slice-inner-left" style="padding-top:12px">
-            <h3>Medals leaderboard</h3>
-        </div>
-        <div class="gv-slice-inner-main" style="padding-top:12px">
-            <ol class="om-table js-table" id="section-leaderboard">
-                {{#each medalsArr}} {{> leaderRow }} {{/each}}
-            </ol>
-            <button class="js-leaderboard-button om-expand-button" id="medal-expand-button">All countries</button>
-            <button class="js-leaderboard-button om-collapse-button hide-el" id="medal-collapse-button">Hide countries</button>
-        </div>
-    </div>
-</section>
 <section class="gv-slice-ux-section">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
@@ -109,4 +123,10 @@
         </div>
     </div>
 </section>
-{{#each daysArr}} {{> dayRow }} {{/each}}
+
+{{#each daysArr}} 
+    {{> dayRow }} 
+{{/each}}
+
+
+

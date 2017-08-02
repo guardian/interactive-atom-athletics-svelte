@@ -17,14 +17,18 @@
                         <div class="gv-ath-day-event-title-time" >{{timeFormat}}</div>  
 
                         <div class="gv-ath-day-event-title-main" ><div class="gv-ath-record-row__flag {{#if highlightEvent}}final{{/if}}">
-                                                                        {{#if highlightEvent}}
-                                                                            <div class="top-circle"></div>
-                                                                            <div class="left-circle"></div>
-                                                                            <div class="right-circle"></div>
-                                                                        {{/if}}
+                            {{#if highlightEvent}}
+                                <div class="top-circle"></div>
+                                <div class="left-circle"></div>
+                                <div class="right-circle"></div>
+                            {{/if}}
 
-                                                                    </div> {{gender}} {{formatTitle}}</div>
-                        {{#if result}} <div class="gv-ath-table-row__close-btn open"  style=""></div> {{/if}}
+                        </div> {{gender}} {{formatTitle}}</div>
+                        {{#if result}} 
+                        <div class="gv-ath-table-row__close-btn open"  style=""></div><div class="gv-ath-table-row__close-btn gv-ath-table-text">result</div> 
+                        {{else}}
+                        <div class="gv-ath-table-row__close-btn gv-ath-table-url"  url-data="{{iaaf_url}} ">read more</div>   
+                        {{/if}}
                     </div>
 
                     <div class="gv-ath-day-event-table hide-el" data-id="{{objKey}}">
