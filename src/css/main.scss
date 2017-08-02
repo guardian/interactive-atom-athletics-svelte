@@ -25,6 +25,18 @@ $bronzeLight : rgba($bronze, 0.7);
 // Uncomment for full screen (including immersive article main media)
 //@import "fullscreen";
 
+
+.content__head--interactive .gs-container:after {
+    content: '';
+    display: block;
+    right: 20px;
+    width: 410px;
+    bottom: 0;
+    background-image: url(https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/bolt.png);
+    background-size: cover;
+}
+
+
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
@@ -57,9 +69,6 @@ $bronzeLight : rgba($bronze, 0.7);
 			padding: 12px 0 24px;
 		}
 }
-
-
-
 
 .gv-slice-inner{
 		width:100%;
@@ -119,7 +128,6 @@ $bronzeLight : rgba($bronze, 0.7);
 
 	}
 }
-
 
 .prose ol>li::before{
 	display: none !important;
