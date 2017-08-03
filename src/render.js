@@ -211,10 +211,7 @@ function getMedalsData(data) {
     //a.countryData = getISO(a[0])
   
     return a;
-
 }
-
-
 
 function sortByKeys(obj) {
     let keys = Object.keys(obj),
