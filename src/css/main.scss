@@ -11,7 +11,7 @@ $silverLight : rgba($silver, 0.7);
 $bronzeLight : rgba($bronze, 0.7);
 
 
-
+@import "headerStyle";
 @import "resultsBoard";
 @import "leaderBoard";
 @import "recordsBoard";
@@ -26,15 +26,6 @@ $bronzeLight : rgba($bronze, 0.7);
 //@import "fullscreen";
 
 
-.content__head--interactive .gs-container:after {
-    content: '';
-    display: block;
-    right: 20px;
-    width: 410px;
-    bottom: 0;
-    background-image: url(https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/bolt.png);
-    background-size: cover;
-}
 
 
 .element-atom,

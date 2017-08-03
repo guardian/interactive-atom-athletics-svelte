@@ -1,0 +1,119 @@
+.content__head--interactive {
+    background-color: #f6f6f6;
+    position: relative
+}
+.content__head--interactive .gs-container {
+    background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/podium-center-bg.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    overflow: hidden;
+    background-size: auto 100%;
+    position: relative
+}
+@media (min-width: 46.25em) {
+    .content__head--interactive .gs-container {
+        height: 320px
+    }
+}
+.content__head--interactive .gs-container:after {
+    content: '';
+    display: block;
+    right: 20px;
+    width: 410px;
+    bottom: 0;
+    // background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/farrah.png");
+    background-size: cover
+}
+@media (min-width: 46.25em) {
+    .content__head--interactive .gs-container:after {
+        position: absolute
+    }
+}
+@media (min-width: 46.25em) {
+    .content__head--interactive .gs-container:after {
+        height: 320px
+    }
+}
+@media (max-width: 46.24em) {
+    .content__head--interactive .gs-container:after {
+        float: right
+    }
+}
+.content__head--interactive .content__main-column {
+    z-index: 300
+}
+@media (min-width: 46.25em) and (max-width: 61.24em) {
+    .content__head--interactive .content__main-column {
+        margin-left: 0
+    }
+}
+.content__head--interactive .content__headline {
+    font-size: 44px;
+    line-height: 48px;
+    font-family: "Guardian Egyptian Web", Georgia, serif;
+    font-weight: normal;
+    font-size: 56px;
+    line-height: 58px;
+    font-weight: 300;
+    padding-bottom: 12px
+}
+@media (min-width: 46.25em) and (max-width: 61.24em) {
+    .content__head--interactive .content__headline {
+        font-size: 48px;
+        line-height: 50px
+    }
+}
+.content__head--interactive .content__section-label__link {
+    color: #ffbb00
+}
+@media (max-width: 46.24em) {
+    .content__head--interactive .gs-container:after {
+        right: 10px;
+        height: 200px;
+        width: 260px;
+        bottom: 0;
+        // background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/farrah.png");
+        background-size: cover
+    }
+    .content__head--interactive .content__main-column {
+        top: 4px
+    }
+    .content__head--interactive .content__headline {
+        font-size: 36px;
+        line-height: 40px;
+        font-family: "Guardian Egyptian Web", Georgia, serif;
+        font-weight: normal;
+        font-weight: 300
+    }
+}
+@media (min-width: 46.25em) and (max-width: 61.24em) {
+    .content__head--interactive .gs-container:after {
+        height: 270px;
+        width: 348px
+    }
+    .content__head--interactive .content__main-column {
+        max-width: 400px;
+        top: 12px
+    }
+}
+@media (min-width: 61.25em) and (max-width: 81.24em) {
+    .content__head--interactive .content__main-column {
+        max-width: 560px
+    }
+}
+.meta__extras {
+    border: 0 !important
+}
+.element-embed img {
+    max-width: 620px
+}
+@media (min-width: 71.25em) {
+    .element-embed img {
+        margin-left: 160px
+    }
+}
+@media (min-width: 81.25em) {
+    .element-embed img {
+        margin-left: 240px
+    }
+}

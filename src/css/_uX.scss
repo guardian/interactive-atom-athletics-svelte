@@ -43,19 +43,33 @@
 		margin-left:240px;
 	}
 }
-
-.gv-key-el{
+.gv-ux-key-wrapper{
+  position:absolute;
+  right:0;
+  top:0;
+  width: 180px;
+  text-align: right;
+  .gv-key-el{
     position:relative;
-    margin:12px 12px 0 0;
+    margin:6px 12px 0 0;
+    display:inline-block;
 
-    @include mq(tablet){
-      position:absolute;
-      top:0;
-      right:0;
-      margin:6px 0 0;
-    }
+    // @include mq(tablet){
+    //   position:absolute;
+    //   top:0;
+    //   right:0;
+    //   margin:6px 0 0;
+      
+    // }
+    // &.key-left-el{
+    //     position:relative;
+    //     margin:6px 0 0;
+    //   }
+
   
 }
+}
+
 
 .key-icon{
   margin: 3px 6px 0 12px !important;

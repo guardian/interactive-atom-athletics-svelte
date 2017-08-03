@@ -224,7 +224,21 @@
         &.gv-ath-table-url{
             margin: 0;
             width:70px;
-            right: 0;   
+            height:14px;
+            text-align: right;
+            padding: 2px 3px 0 0;
+            right: 0;  
+            svg{
+                fill: $neutral-3;
+                height:14px;
+                width:14px;
+            } 
+
+            &:hover{
+                svg{
+                    fill:$news-main-1;
+                }
+            }
             
         }
         &.gv-ath-table-text{
