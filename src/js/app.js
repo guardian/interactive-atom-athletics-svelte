@@ -1,10 +1,9 @@
+let initialHeight = 480;
+
 function init() {
     addListeners();
-
-    initView();
-        
+    initView();     
 }
-
 
 function getH(id)
 {
@@ -14,7 +13,7 @@ function getH(id)
 function addListeners() {
     var expandBtnEl = document.querySelector('#medal-expand-button');
     var collapseButtonEl = document.querySelector('#medal-collapse-button');
-    let initialHeight = 460;
+    
     let divHeight = initialHeight;
     let jump = 850;
     let maxH = getH('section-leaderboard');
@@ -76,8 +75,6 @@ function addListeners() {
                         tableEl.classList.add("show-el");
                     }
                 })
-
-            
         })
     });
 
@@ -99,19 +96,44 @@ function addListeners() {
         updateCountryView(e.target.value)       
     })
 
-    
-
 }
 
 function initView(){
+
     document.querySelectorAll('.gv-day-slice-section').forEach(el => {
-                if(el.getAttribute("data-id") === "day-slice-1" ){
-                    el.classList.remove("hide-el")
-                } 
+        if(el.getAttribute("data-id") === "day-slice-1" ){
+            el.classList.remove("hide-el")
+        } 
     })
 
-    document.getElementById('gv-ath-medal-by-country-selector').value = "1";
-    updateCountryView("1")
+    let recordRowArr = document.querySelectorAll('.gv-ath-record-row');
+
+    if(recordRowArr.length > 0){
+        document.getElementById("recordsSlice").classList.remove("hide-el");
+    }
+
+    //remove this with first medals
+
+    document.querySelectorAll('.om-medal-white').forEach(el => {
+
+            el.style.transform = "scaleX(3)";
+   
+    })
+
+    document.querySelectorAll('.om-medal-circle').forEach(el => {
+      
+            el.style.transform = "scale(3)";
+     
+    })
+    
+    
+    // change this to "1" when medals start
+    document.getElementById('gv-ath-medal-by-country-selector').value = "67";
+    updateCountryView("67");
+
+    document.getElementById('expandingWrapper').style.height = initialHeight+ "px";
+
+
 }
 
 function updateCountryView(n){

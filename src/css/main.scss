@@ -123,3 +123,18 @@ $bronzeLight : rgba($bronze, 0.7);
 .prose ol>li::before{
 	display: none !important;
 }
+
+.show-mobile{
+	display:inline-block;
+	@include mq(tablet){
+		display:none;
+	}
+}
+
+
+.show-tablet{
+	display:none;
+	@include mq(tablet){
+			display:inline-block;
+	}
+}

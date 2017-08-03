@@ -3,7 +3,8 @@
     <div class="om-table-left-area">
         <div class="om-table-row__position">{{medal.position}}.</div>
         <div class="om-table-row__flag om-flag om-flag--{{objKey}}"  style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>
-        <div class="om-table-row__country">{{objKey}}</div>
+        <div class="om-table-row__country show-mobile">{{objKey}}</div>
+        <div class="om-table-row__country show-tablet">{{country}}</div>
     </div>
     <div class="om-table-row__medal om-table-row-medal__first">
         <div class="om-medal-white" style="transform:scaleX({{circleSizes.gold}})"></div>

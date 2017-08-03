@@ -1,7 +1,7 @@
- 
+
 
 {{#if recordsArr}}
-<section class="gv-slice-section">
+<section class="gv-slice-section hide-el" id="recordsSlice">
     <div class="gv-slice-inner">
         <div class="gv-slice-inner-left">
             <h3>Records</h3>
@@ -27,7 +27,7 @@
                 </div>
                 <select class="gv-team-list" id="gv-ath-medal-by-country-selector">
                     {{#each countriesArr}}
-                    <option value="{{position}}">{{country}}</option>
+                    <option value="{{position}}" data-id="{{country}}">{{country}}</option>
                     {{/each}}
                 </select>
             </div>
@@ -54,7 +54,7 @@
             <h3>Medals leaderboard</h3>
         </div>
         <div class="gv-slice-inner-main" style="padding-top:12px">
-           <div class="gv-expanding-wrapper"  style="height:600px; overflow:hidden;" id="expandingWrapper">
+           <div class="gv-expanding-wrapper"  style="height:480px; overflow:hidden;" id="expandingWrapper">
                 <ol class="om-table js-table" id="section-leaderboard">
                     {{#each medalsArr}} {{> leaderRow }} {{/each}}
                 </ol>

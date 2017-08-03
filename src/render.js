@@ -160,7 +160,9 @@ function getMedalsData(data) {
     a = sortByKeys(a);
 
     a.map((obj) => {
+        
 
+        
         obj.medal = {};
         obj.medal.gold = 0;
         obj.medal.silver = 0;
@@ -193,7 +195,7 @@ function getMedalsData(data) {
     a.sort((a, b) => (b.medal.gold - a.medal.gold) || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze) || (b.objKey - a.objKey))
 
     a.map((obj) => {
-
+        obj = getISO(obj);
         obj.medal.position = pos;
         obj.hidden = pos < 11 ? false : true
         obj.circleSizes = {
@@ -205,6 +207,9 @@ function getMedalsData(data) {
         pos++;
     })
 
+
+    //a.countryData = getISO(a[0])
+  
     return a;
 
 }
@@ -313,7 +318,6 @@ function getRecArr(data) {
         if (item.country == "East Germany") { item.ISO = "DDR" }
         if (item.country == "Czechoslovakia") { item.ISO = "TCH" }
 
-        console.log(item.country)    
 
         item = getISO(item);
 
