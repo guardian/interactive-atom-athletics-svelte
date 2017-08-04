@@ -16,11 +16,11 @@ let countries;
 
 let IAAFstem = "http://www.iaafworldchampionships.com/events/";
 
-console.log(Handlebars)
+//console.log(Handlebars)
 
 xr.get('https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1oQ96A25xpbPSsD8Mck.json').then((resp) => {
-  console.log(resp)
-    var data = resp.data.sheets
+
+    var data = formatData(resp.data);
 
     var dataObj = {};
 
@@ -41,21 +41,22 @@ xr.get('https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1o
 
     var compiledHTML = compileHTML(dataObj);
 
-
-
     // inject that rendered html into the empty div we declared in main.html
     document.querySelector(".gv-interactive-container").innerHTML = compiledHTML;
+
+
+    initView();
 });
 
 
 
 function formatData(data) {
+
     var newObj = {};
 
     countries = data.sheets.countries_list;
 
     countries = getCountryNames(countries);
-
 
     let fixtures = data.sheets.fixtures;
 
@@ -123,10 +124,10 @@ function formatResultsData(results, fixtures){
 }
 
 function getCountryNames(countries){
-
+    console.log(countries)
     countries.map((obj) => {
         obj.country = obj.Country_Name;
-        obj.ISO = obj.iso;
+        obj.ISO = obj.ISO;
         obj.flag = obj.ISO.toLowerCase();
     })
 
@@ -138,7 +139,7 @@ function getISO(o){
     let c = o.country;
     countries.map((obj) => {
         if(c === obj.country){
-            o.ISO = obj.ISO;
+            o.ISO = obj.iso;
             o.flag = obj.flag;
         }
     })
@@ -149,13 +150,13 @@ function getISO(o){
 
 function getMedalsData(data) {
 
-    let a = groupBy(data.countries_list, "iso");
+    console.log(data)
+
+    let a = groupBy(data.countries, "ISO");
 
     a = sortByKeys(a);
 
     a.map((obj) => {
-
-
 
         obj.medal = {};
         obj.medal.gold = 0;
@@ -573,7 +574,7 @@ function groupBy(xs, key) {
 
 let initialHeight = 480;
 
-function init() {
+function initApp() {
     addListeners();
     initView();
 }
@@ -721,4 +722,4 @@ function updateCountryView(n){
     })
 }
 
-//init();
+
