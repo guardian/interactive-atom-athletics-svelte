@@ -64,7 +64,7 @@ function formatData(data) {
         obj.ref = count;
         obj.event = getShortEvent(obj.event);
         obj.athEvent = obj.sex + "_" + obj.event.split(" ").join("--") + "_" + obj.stage.split(" ").join("--");
-        obj.sex = obj.sex.toLowerCase();
+        //obj.sex = obj.sex.toLowerCase();
 
         count++;
     })
@@ -81,6 +81,8 @@ function formatData(data) {
         obj.event = getShortEvent(obj.event);
         obj.athEventRecord = obj.sex + "_" + obj.event.split(" ").join("--");
         obj.formatEvent = getFormatEvent(obj.sex, obj.event);
+
+
     })
 
     newObj.countries = countries;
@@ -93,38 +95,41 @@ function formatData(data) {
 }
 
 
-function formatResultsData(results, fixtures){
+function formatResultsData(results, fixtures) {
 
     let count = 0;
 
     results.map((res) => {
 
         fixtures.map((item) => {
-            if(item.event_id == res.event_id ){
+            if (item.event_id == res.event_id) {
                 res.date = item.date;
                 res.start_time = item.start_time;
                 res.event = item.event;
                 res.stage = item.stage;
                 res.measure = item.measure;
+                
             }
 
-            count ++
+            count++
         })
-
+        
+        res.ISO = res.flag;
+        
         res.ref = count;
         res.event = getShortEvent(res.event);
 
         res.athEvent = res.sex + "_" + res.event.split(" ").join("--") + "_" + res.stage.split(" ").join("--");
         res.score = res.result;
-
+       
         count++;
     })
 
     return results;
 }
 
-function getCountryNames(countries){
-    console.log(countries)
+function getCountryNames(countries) {
+
     countries.map((obj) => {
         obj.country = obj.Country_Name;
         obj.ISO = obj.ISO;
@@ -135,10 +140,10 @@ function getCountryNames(countries){
 }
 
 
-function getISO(o){
+function getISO(o) {
     let c = o.country;
     countries.map((obj) => {
-        if(c === obj.country){
+        if (c === obj.country) {
             o.ISO = obj.iso;
             o.flag = obj.flag;
         }
@@ -173,8 +178,10 @@ function getMedalsData(data) {
             item.formatDate = getFormatDate(item.date, "DD Mmm");
             item.formatEvent = getFormatEvent(item.sex, item.event);
 
-            if (item.sex == "w"){item.sexStr = "Women’s "}
-            if (item.sex == "m"){item.sexStr = "Men’s " };
+            console.log(item.sex)
+
+            if (item.sex == "w" || item.sex == "W" ) { item.sexStr = "Women’s " }
+            if (item.sex == "m" || item.sex == "M" ) { item.sexStr = "Men’s " };
 
             if (item.medal && item.country === obj.objArr[0].Country_Name) { obj.medallists.push(item) }
         })
@@ -240,9 +247,9 @@ function getEventsData(data) {
         obj.dataDate = obj.objArr[0].date.split(" ").join("_");
         obj.gender = obj.objArr[0].sex.toLowerCase();
         obj.stage = obj.objArr[0].stage;
-        obj.iaaf_url = IAAFstem+obj.objArr[0].event_id ;
-        obj.gender == "w" ? obj.gender = "Women’s" : obj.gender = "Men’s";
-        obj.formatTitle = obj.objArr[0].event + " " + obj.objArr[0].stage;
+        obj.iaaf_url = IAAFstem + obj.objArr[0].event_id;
+        obj.gender == "w" || obj.gender == "W" ? obj.gender = "Women’s" : obj.gender = "Men’s";
+        obj.formatTitle = obj.objArr[0].event + " " + obj.objArr[0].stage.toLowerCase();
 
 
         if (obj.objArr[0].stage == "Final") { obj.highlightEvent = true };
@@ -274,7 +281,7 @@ function getItemResults(item, results) {
 
         obj.sex = s;
         obj.measure = item.measure;
-        if( t == obj.athEvent.toLowerCase()){
+        if (t == obj.athEvent.toLowerCase()) {
             tempArr.push(obj);
         }
     })
@@ -298,7 +305,7 @@ function getRecArr(data) {
         item.date = new Date(item.date);
         item.formatEvent = getFormatEvent("null", item.event);
 
-        item.sex == "w" ? item.sexStr = "Women’s " : item.sexStr = "Men’s ";
+        item.sex == "w" || item.sex == "W" ? item.sexStr = "Women’s " : item.sexStr = "Men’s ";
 
 
         if (item.record == "national") { item.nationalRecord = true }
@@ -465,10 +472,11 @@ function getFormatDate(d, f) {
 
 function getFormatEvent(sex, event) {
     let evStr = event.replace(/ throw/g, '');
+    evStr = evStr.toLowerCase();
     sex = sex.toLowerCase().replace(/\s/g, "");
     let str;
-    if (sex == "null") { str = evStr };
-    if (sex == "m") { str = "Men\u2019s " + evStr };
+    if (sex == "null") { str = evStr.toLowerCase() };
+    if (sex == "m") { str = "Men\u2019s " + evStr};
     if (sex == "w") { str = "Women\u2019s " + evStr };
 
     return evStr;
@@ -496,6 +504,12 @@ function compileHTML(data) {
         return str;
     });
 
+    Handlebars.registerHelper('uppercase', function(options) {  
+
+        return options.fn(this).toUpperCase();
+
+      });
+
     Handlebars.registerPartial({
         'leaderRow': leaderRowTemplate,
         'resultRow': resultRowTemplate,
@@ -518,44 +532,12 @@ function compileHTML(data) {
 
 
 function groupBy(xs, key) {
-  return xs.reduce(function(rv, x) {
-    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return xs.reduce(function(rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
 
-    return rv;
-  }, {});
+        return rv;
+    }, {});
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -566,21 +548,13 @@ function groupBy(xs, key) {
 ////////////////////////
 
 
-
-
-
-
-
-
 let initialHeight = 480;
 
 function initApp() {
-    addListeners();
     initView();
 }
 
-function getH(id)
-{
+function getH(id) {
     return document.getElementById(id).offsetHeight;
 }
 
@@ -593,22 +567,22 @@ function addListeners() {
     let maxH = getH('section-leaderboard');
 
     expandBtnEl.addEventListener('click', function(e) {
-        if(divHeight < maxH){
+        if (divHeight < maxH) {
             divHeight += jump;
         }
 
-        if(divHeight > maxH){
-            divHeight =  maxH;
+        if (divHeight > maxH) {
+            divHeight = maxH;
             collapseButtonEl.classList.add('show-el');
             expandBtnEl.classList.remove('show-el');
             expandBtnEl.classList.add('hide-el');
         }
-        document.getElementById('expandingWrapper').style.height = divHeight+ "px";
+        document.getElementById('expandingWrapper').style.height = divHeight + "px";
 
     })
 
     collapseButtonEl.addEventListener('click', function(e) {
-        document.getElementById('expandingWrapper').style.height = initialHeight+ "px";
+        document.getElementById('expandingWrapper').style.height = initialHeight + "px";
 
         let scrollEl = document.getElementById("leaderBoardSlice")
 
@@ -636,19 +610,19 @@ function addListeners() {
 
     document.querySelectorAll('.gv-ath-day-event-title-result').forEach(el => {
         el.addEventListener('click', function(e) {
-                let ref = this.getAttribute("data-id");
-                this.classList.add("day-expanded");
+            let ref = this.getAttribute("data-id");
+            this.classList.add("day-expanded");
 
-                var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
-                    closeBtn.classList.remove('open');
-                    closeBtn.classList.add('close');
+            var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
+            closeBtn.classList.remove('open');
+            closeBtn.classList.add('close');
 
-                document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
-                    if (ref === tableEl.getAttribute("data-id")) {
-                        tableEl.classList.remove("hide-el");
-                        tableEl.classList.add("show-el");
-                    }
-                })
+            document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
+                if (ref === tableEl.getAttribute("data-id")) {
+                    tableEl.classList.remove("hide-el");
+                    tableEl.classList.add("show-el");
+                }
+            })
         })
     });
 
@@ -661,9 +635,9 @@ function addListeners() {
 
     document.querySelector('#gv-ath-day-selector').addEventListener('change', function(e) {
         let t = e.target.value;
-            document.querySelectorAll('.gv-day-slice-section').forEach(el => {
-                t === el.getAttribute("data-id") ? el.classList.remove("hide-el") : el.classList.add("hide-el");
-            })
+        document.querySelectorAll('.gv-day-slice-section').forEach(el => {
+            t === el.getAttribute("data-id") ? el.classList.remove("hide-el") : el.classList.add("hide-el");
+        })
     })
 
     document.querySelector('#gv-ath-medal-by-country-selector').addEventListener('change', function(e) {
@@ -672,54 +646,61 @@ function addListeners() {
 
 }
 
-function initView(){
+function initView() {
 
     document.querySelectorAll('.gv-day-slice-section').forEach(el => {
-        if(el.getAttribute("data-id") === "day-slice-1" ){
+        if (el.getAttribute("data-id") === "day-slice-1") {
             el.classList.remove("hide-el")
         }
     })
 
     let recordRowArr = document.querySelectorAll('.gv-ath-record-row');
 
-    if(recordRowArr.length > 0){
+    if (recordRowArr.length > 0) {
         document.getElementById("recordsSlice").classList.remove("hide-el");
     }
 
     //remove this with first medals
 
-    document.querySelectorAll('.om-medal-white').forEach(el => {
 
+
+    if (maxMedal < 1) {
+        document.getElementById('gv-ath-medal-by-country-selector').value = "67";
+        updateCountryView("67");
+
+        document.querySelectorAll('.om-medal-white').forEach(el => {
             el.style.transform = "scaleX(3)";
+        })
 
-    })
-
-    document.querySelectorAll('.om-medal-circle').forEach(el => {
+        document.querySelectorAll('.om-medal-circle').forEach(el => {
 
             el.style.transform = "scale(3)";
-
-    })
-
-
-    // change this to "1" when medals start
-    document.getElementById('gv-ath-medal-by-country-selector').value = "67";
-    updateCountryView("67");
-
-    document.getElementById('expandingWrapper').style.height = initialHeight+ "px";
+        })
+    } else {
+        document.getElementById('gv-ath-medal-by-country-selector').value = "1";
+        updateCountryView("1");
+    }
 
 
-}
 
-function updateCountryView(n){
-    document.getElementById("list-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
+
+
+        document.getElementById('expandingWrapper').style.height = initialHeight + "px";
+
+
+        addListeners();
+
+
+    }
+
+    function updateCountryView(n) {
+        document.getElementById("list-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
             el.classList.add("hidden-row")
-            if(el.getAttribute("data-position") == n){ el.classList.remove("hidden-row") }
-    })
+            if (el.getAttribute("data-position") == n) { el.classList.remove("hidden-row") }
+        })
 
-    document.getElementById("slice-medals-by-country").querySelectorAll(".gv-ath-wrapper").forEach(el => {
+        document.getElementById("slice-medals-by-country").querySelectorAll(".gv-ath-wrapper").forEach(el => {
             el.classList.add("hide-el")
-            if(el.getAttribute("data-position") == n){ el.classList.remove("hide-el") }
-    })
-}
-
-
+            if (el.getAttribute("data-position") == n) { el.classList.remove("hide-el") }
+        })
+    }

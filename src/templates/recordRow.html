@@ -9,7 +9,7 @@
          {{#if gamesRecord}}<div class="gv-ath-table-el record-label">Games record</div>{{/if}}
             <div class="gv-ath-table-el athlete">
             	<span class="gv-ath-table-hl">{{athlete}} (<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')">
-            </div> {{ISO}})</span>
+            </div> {{#uppercase}}{{flag}}{{/uppercase}})</span>
         </div>
         
         <div class="gv-ath-table-el event"> {{sexStr}} {{formatEvent}}</div>
