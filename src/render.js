@@ -38,6 +38,8 @@ export async function render() {
     let daysArr = getDaysArr(data);
     dataObj.daysArr = daysArr;
 
+
+
     var compiledHTML = compileHTML(dataObj);
 
     return compiledHTML;
@@ -51,24 +53,29 @@ export async function loadData() {
     }));
 
 
+
+
     return data;
 }
 
 
-function formatData(data) {
+function formatData(data) {     
+
     var newObj = {};
 
     countries = data.sheets.countries_list;
 
     countries = getCountryNames(countries);
 
-
     let fixtures = data.sheets.fixtures;
+
+    
 
     fixtures.map((obj) => {       
         obj.ref = count;
         obj.event = getShortEvent(obj.event);
         obj.athEvent = obj.sex + "_" + obj.event.split(" ").join("--") + "_" + obj.stage.split(" ").join("--");
+
         obj.sex = obj.sex.toLowerCase();
 
         count++;
@@ -131,8 +138,10 @@ function formatResultsData(results, fixtures){
 function getCountryNames(countries){
 
     countries.map((obj) => {  
+
+        console.log(obj)
         obj.country = obj.Country_Name;
-        obj.ISO = obj.iso;
+        obj.ISO = obj.ISO;
         obj.flag = obj.ISO.toLowerCase(); 
     })
 
