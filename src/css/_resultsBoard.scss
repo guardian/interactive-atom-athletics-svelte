@@ -111,9 +111,11 @@
         width: 100%;
         height: 24px;
         border-top: 1px dotted $neutral-3;
+        padding: 6px 0;
         @include fs-textSans(1);
         @include mq(tablet){
             @include fs-textSans(3);
+            padding: 0;
         }
     }
     .gv-ath-day-event-table-row:first-child {
@@ -178,8 +180,12 @@
         background-position: center;
         width: 12px;
         height: 12px;
-        margin: 3px 3px 0;
+        margin: 1px 3px;
+        
         border-radius: 100px;
+        @include mq(tablet){
+            margin: 3px 3px 0;
+        }
         &.color-Bronze {
             border-color: $bronze;
             background-color: $bronze;     
@@ -193,11 +199,19 @@
             background-color: $gold;
         }
          &.color-Gold, &.color-Silver, &.color-Bronze{
-            margin: 3px 14px 0 1px;
+           margin:  1px 14px 1px 1px; 
+
+           @include mq(tablet){
+                margin: 3px 14px 0 1px;
+            }
+            
         }
 
         &.by-country{
-            margin: 3px 15px 0 3px;
+            margin: 7px 15px 0 0;
+             @include mq(tablet){
+                margin: 3px 15px 0 3px;
+            }
         }
     }
 
