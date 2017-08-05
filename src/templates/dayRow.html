@@ -16,18 +16,21 @@
                     <div class="gv-ath-day-event-title{{#if result}}-result{{/if}}" data-id="{{objKey}}">
                         <div class="gv-ath-day-event-title-time" >{{timeFormat}}</div>  
 
-                        <div class="gv-ath-day-event-title-main" ><div class="gv-ath-record-row__flag {{#if highlightEvent}}final{{/if}}">
+                        <div class="gv-ath-day-event-title-main" >
+
+                        <div class="gv-ath-record-row__flag {{#if highlightEvent}}final{{/if}}">
                             {{#if highlightEvent}}
                                 <div class="top-circle"></div>
                                 <div class="left-circle"></div>
                                 <div class="right-circle"></div>
                             {{/if}}
-
-                        </div> {{gender}} {{formatTitle}}</div>
+                        </div> 
+                        <div class="gv-ath-day-event-mainEvent">{{gender}} {{formatTitle}}</div>
+                        </div>
                         {{#if result}} 
-                        <div class="gv-ath-table-row__close-btn open"  style=""></div><div class="gv-ath-table-row__close-btn gv-ath-table-text">result</div> 
+                        <div class="gv-ath-table-row__close-btn open show-tablet"  style=""></div><div class="gv-ath-table-row__close-btn gv-ath-table-text">result</div> 
                         {{else}}
-                        <div class="gv-ath-table-row__close-btn gv-ath-table-url"  url-data="{{iaaf_url}} "><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" width="14px" height="14px">
+                        <div class="gv-ath-table-row__close-btn gv-ath-table-url show-tablet"  url-data="{{iaaf_url}} "><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" width="14px" height="14px">
 <g>
     <path d="M7.3,12.6c-3.3,0-6-2.7-6-6c0-3.3,2.7-6,6-6c3.3,0,6,2.7,6,6C13.3,9.9,10.6,12.6,7.3,12.6z M7.3,9.7l1.4-4.8
         L8.6,4.8L6.2,5.1L6,5.9h0.8L5.6,9.8c-0.2,0.7,0.2,0.9,0.7,0.9c0.6,0,1.3-0.1,1.7-0.3l0.2-0.7H7.3z M9.1,3.3c0-0.5-0.4-0.8-0.9-0.8
@@ -54,7 +57,7 @@
                                         </div>
                                             
 
-                                            <div class="gv-ath-table-el athlete"> {{athlete}} </div>
+                                            <div class="gv-ath-table-el athlete"> {{athlete}} (<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>{{#uppercase}}{{flag}}{{/uppercase}})</div>
                                           
                                             <div class="gv-ath-table-el score">{{score}}</div>
                                         </div>

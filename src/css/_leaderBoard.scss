@@ -146,10 +146,10 @@
 .om-table {
 	@include fs-textSans(3);
 	list-style-type: none;
-    margin: 72px 0 0 0;
+    margin: 72px 0 0 0 !important;
     padding: 0;
-    @include mq(leftCol){
-    	margin: 32px 0 0 0;
+    @include mq(tablet){
+    	margin: 32px 0 !important;
     }
     &.by-country{
     	margin: 0;
@@ -165,19 +165,14 @@
 	padding-right: 20px;
 	position: relative;
 
-	&:first-child {
-		// &:before {
-		// 	border-top: 1px solid $neutral-4;
-		// 	content: '';
-		// 	margin: 0 auto 0 80px;
-		// 	position: absolute;
-		// 	top: 28%;
-		// 	left: 0;
-		// 	width: calc(100% - 80px);
-		// 	z-index: 0;
-		// }
+	// &:first-child {
+	// 	&:before {
+	// 		margin: 60px 0 0 0!important;
+			
+
+	// 	}
 		
-	}
+	// }
 
 	&:before {
 		border-top: 1px solid $neutral-4;
@@ -400,3 +395,12 @@
 .show-el{
     display: inline-block;
 }
+
+.gv-expanding-wrapper{
+	padding-top: 30px !important;
+
+	@include mq(tablet){
+		padding-top: 0  !important;
+	}
+}
+

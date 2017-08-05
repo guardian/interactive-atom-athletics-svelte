@@ -79,13 +79,31 @@
     .gv-ath-day-event-title-result {
         margin: 6px 0;
         .gv-ath-day-event-title-time {
+            font-weight: bold;
             float: left;
             display: inline-block;
             width: 53px;
+            @include mq(tablet){
+                font-weight:normal;
+            }
         }
         .gv-ath-day-event-title-main {
             width: auto;
         }
+    }
+
+    .gv-ath-day-event-mainEvent{
+
+        max-width:180px;
+        display:inline-block;
+
+        @include mq(tablet){
+            max-width:300px;
+        }
+    }
+
+    .gv-ath-day-event-title-main{
+        width:180px;
     }
     .gv-ath-day-event-table-row {
         position: relative;

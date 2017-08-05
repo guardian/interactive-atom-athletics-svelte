@@ -16,7 +16,6 @@ let countries;
 
 let IAAFstem = "http://www.iaafworldchampionships.com/events/";
 
-//console.log(Handlebars)
 
 xr.get('https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1oQ96A25xpbPSsD8Mck.json').then((resp) => {
 
@@ -108,6 +107,7 @@ function formatResultsData(results, fixtures) {
                 res.event = item.event;
                 res.stage = item.stage;
                 res.measure = item.measure;
+                if ( res.athlete ){item.result = "Y";}
                 
             }
 
@@ -144,7 +144,7 @@ function getISO(o) {
     let c = o.country;
     countries.map((obj) => {
         if (c === obj.country) {
-            o.ISO = obj.iso;
+            o.ISO = obj.ISO;
             o.flag = obj.flag;
         }
     })
@@ -154,8 +154,6 @@ function getISO(o) {
 };
 
 function getMedalsData(data) {
-
-    console.log(data)
 
     let a = groupBy(data.countries, "ISO");
 
@@ -177,8 +175,6 @@ function getMedalsData(data) {
 
             item.formatDate = getFormatDate(item.date, "DD Mmm");
             item.formatEvent = getFormatEvent(item.sex, item.event);
-
-            console.log(item.sex)
 
             if (item.sex == "w" || item.sex == "W" ) { item.sexStr = "Women’s " }
             if (item.sex == "m" || item.sex == "M" ) { item.sexStr = "Men’s " };
@@ -278,10 +274,14 @@ function getItemResults(item, results) {
 
     var tempArr = [];
     results.map((obj) => {
-
         obj.sex = s;
         obj.measure = item.measure;
+
+        obj = getObjISO(obj);
+        
         if (t == obj.athEvent.toLowerCase()) {
+            
+           
             tempArr.push(obj);
         }
     })
@@ -291,6 +291,20 @@ function getItemResults(item, results) {
     return tempArr;
 }
 
+
+function getObjISO(o){
+    
+    let c = o.country;
+    countries.map((obj) => {
+        if (c === obj.country) {
+            o.ISO = obj.ISO;
+            o.flag = obj.flag;
+        }
+    })
+console.log(o)
+    return o;
+    
+}
 
 function getRecArr(data) {
 
@@ -307,19 +321,14 @@ function getRecArr(data) {
 
         item.sex == "w" || item.sex == "W" ? item.sexStr = "Women’s " : item.sexStr = "Men’s ";
 
-
         if (item.record == "national") { item.nationalRecord = true }
         if (item.record == "world") { item.worldRecord = true }
         if (item.record == "games") { item.gamesRecord = true }
 
-
-
         if (item.country == "East Germany") { item.ISO = "DDR" }
         if (item.country == "Czechoslovakia") { item.ISO = "TCH" }
 
-
         item = getISO(item);
-
 
     })
 
@@ -548,7 +557,7 @@ function groupBy(xs, key) {
 ////////////////////////
 
 
-let initialHeight = 480;
+let initialHeight = 470;
 
 function initApp() {
     initView();
@@ -564,7 +573,7 @@ function addListeners() {
 
     let divHeight = initialHeight;
     let jump = 850;
-    let maxH = getH('section-leaderboard');
+    let maxH = getH('section-leaderboard') + 150;
 
     expandBtnEl.addEventListener('click', function(e) {
         if (divHeight < maxH) {

@@ -3,7 +3,7 @@
     position: relative
 }
 .content__head--interactive .gs-container {
-    background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/podium-center-bg.png");
+    background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/pod-bg.png");
     background-repeat: no-repeat;
     background-position: top right;
     overflow: hidden;
@@ -12,7 +12,8 @@
 }
 @media (min-width: 46.25em) {
     .content__head--interactive .gs-container {
-        height: 320px
+           height: 320px 
+
     }
 }
 .content__head--interactive .gs-container:after {
@@ -52,8 +53,7 @@
     line-height: 48px;
     font-family: "Guardian Egyptian Web", Georgia, serif;
     font-weight: normal;
-    font-size: 56px;
-    line-height: 58px;
+
     font-weight: 300;
     padding-bottom: 12px
 }

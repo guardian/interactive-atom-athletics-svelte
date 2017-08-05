@@ -44,11 +44,22 @@
 	}
 }
 .gv-ux-key-wrapper{
-  position:absolute;
-  right:0;
-  top:0;
-  width: 180px;
-  text-align: right;
+
+  position: relative;
+  right: 0;
+  top: 0;
+  width: 100px;
+  text-align: left;
+
+  @include mq(tablet){
+    position:absolute;
+    right:0;
+    top:0;
+    width: 180px;
+    text-align: right;
+  }
+ 
+
   .gv-key-el{
     position:relative;
     margin:6px 12px 0 0;
@@ -121,13 +132,28 @@
     
 }
 
+.gv-button-holder{
+  padding-top:12px;
+  border-top: 1px solid $neutral-5;
+
+  @include mq(tablet){
+      padding-top:0;
+      border-top: none;
+    }
+}
+
 .gv-expanding-wrapper:after {
+    display:none;
     position: absolute;
-    bottom: 40px;
+    bottom: 30px;
     height: 30px;
     background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
     content: '';
-    display: block;
+    
     width: 100%;
-    // border-bottom: 1px solid #CCC;
+    margin-bottom:12px;
+    border-bottom: 1px solid $neutral-6;
+    @include mq(tablet){
+      display: block;
+    }
 }

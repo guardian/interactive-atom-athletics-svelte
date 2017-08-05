@@ -6,9 +6,9 @@ $gold: $multimedia-main-2;
 $silver : $neutral-3;
 $bronze : rgb(240,146,77);
 
-$goldLight: rgba($gold, 0.7);
-$silverLight : rgba($silver, 0.7);
-$bronzeLight : rgba($bronze, 0.7);
+$goldLight: rgba($gold, 0.9);
+$silverLight : rgba($silver, 0.9);
+$bronzeLight : rgba($bronze, 0.9);
 
 
 @import "headerStyle";
@@ -24,8 +24,6 @@ $bronzeLight : rgba($bronze, 0.7);
 
 // Uncomment for full screen (including immersive article main media)
 //@import "fullscreen";
-
-
 
 
 .element-atom,
