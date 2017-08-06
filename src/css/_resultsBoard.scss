@@ -153,11 +153,21 @@
             @include mq(tablet){
                 width: 70px;
             }
+
+            &.res-table{
+                text-align: right;
+
+                @include mq(tablet){
+                    text-align: left;
+                }
+            }
             
         }
 
         &.event {
-            width: 180px;
+            width: 200px;
+            padding-left:30px;
+
         }
         &.icon {
             width: 20px;

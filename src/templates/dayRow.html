@@ -28,7 +28,7 @@
                         <div class="gv-ath-day-event-mainEvent">{{gender}} {{formatTitle}}</div>
                         </div>
                         {{#if result}} 
-                        <div class="gv-ath-table-row__close-btn open"  style=""></div><div class="gv-ath-table-row__close-btn gv-ath-table-text">result</div> 
+                        <div class="gv-ath-table-row__close-btn open"  style=""></div><div class="gv-ath-table-row__close-btn gv-ath-table-text"><span class="show-tablet">result</span></div> 
                         {{else}}
                         <div class="gv-ath-table-row__close-btn gv-ath-table-url show-tablet"  url-data="{{iaaf_url}} "><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" width="14px" height="14px">
 <g>
@@ -59,7 +59,7 @@
 
                                             <div class="gv-ath-table-el athlete" style="max-width:220px;"> {{athlete}} (<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>{{#uppercase}}{{flag}}{{/uppercase}})</div>
                                           
-                                            <div class="gv-ath-table-el score"  style="text-align:left;">{{score}}</div>
+                                            <div class="gv-ath-table-el score res-table">{{score}}</div>
                                         </div>
                                     {{/each}}
                                     {{/if}}
