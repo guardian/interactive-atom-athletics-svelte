@@ -57,9 +57,9 @@
                                         </div>
                                             
 
-                                            <div class="gv-ath-table-el athlete"> {{athlete}} (<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>{{#uppercase}}{{flag}}{{/uppercase}})</div>
+                                            <div class="gv-ath-table-el athlete" style="max-width:220px;"> {{athlete}} (<div class="gv-ath-table-row__flag" style="background-image:url('<%= path %>/assets/imgs/flags/{{flag}}.svg')"></div>{{#uppercase}}{{flag}}{{/uppercase}})</div>
                                           
-                                            <div class="gv-ath-table-el score">{{score}}</div>
+                                            <div class="gv-ath-table-el score"  style="text-align:left;">{{score}}</div>
                                         </div>
                                     {{/each}}
                                     {{/if}}

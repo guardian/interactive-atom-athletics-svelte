@@ -147,7 +147,7 @@
         &.score {
             position: absolute;
             right: 0;
-            text-align: left;
+            text-align: right;
             margin-left: 0;
             width:58px;
             @include mq(tablet){
@@ -170,7 +170,7 @@
             width: 100%;
             max-width:220px;
             @include mq(tablet){
-                max-width:300px;
+                max-width:160px;
             }
         }
     }
