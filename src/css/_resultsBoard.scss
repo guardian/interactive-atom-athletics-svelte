@@ -180,8 +180,15 @@
             width: 100%;
             max-width:220px;
             @include mq(tablet){
-                max-width:160px;
+                
             }
+            &.res-table{
+                @include mq(tablet){
+                    max-width:240px;
+                }
+            }
+
+
         }
     }
     .gv-ath-table-row__flag {
