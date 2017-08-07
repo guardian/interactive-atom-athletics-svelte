@@ -43,8 +43,7 @@ xr.get('https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1o
     // inject that rendered html into the empty div we declared in main.html
     document.querySelector(".gv-interactive-container").innerHTML = compiledHTML;
 
-
-    initView();
+    initApp();
 });
 
 
@@ -190,9 +189,11 @@ function getMedalsData(data) {
 
     var pos = 1;
 
-    a.sort((a, b) => (b.medal.gold - a.medal.gold) || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze) || (b.objKey - a.objKey))
+
+    a.sort((a, b) => (b.medal.gold - a.medal.gold) || (b.medal.silver - a.medal.silver) || (b.medal.bronze - a.medal.bronze) || (b.country - a.country));
 
     a.map((obj) => {
+
         obj = getISO(obj);
         obj.medal.position = pos;
         obj.hidden = pos < 11 ? false : true
@@ -301,7 +302,7 @@ function getObjISO(o){
             o.flag = obj.flag;
         }
     })
-console.log(o)
+
     return o;
     
 }
@@ -605,10 +606,10 @@ function addListeners() {
     })
 
 
-    document.querySelectorAll('.gv-ath-results__list-item').forEach(el => {
+    Array.from(document.querySelectorAll('.gv-ath-results__list-item')).forEach(el => {
         el.addEventListener('click', function(e) {
             let ref = this.getAttribute("data-id");
-            document.querySelectorAll('.gv-ath-table').forEach(tableEl => {
+            Array.from(document.querySelectorAll('.gv-ath-table')).forEach(tableEl => {
                 if (ref === tableEl.getAttribute("data-id")) {
                     tableEl.classList.remove("hide-el");
                     tableEl.classList.add("show-el");
@@ -617,7 +618,7 @@ function addListeners() {
         })
     });
 
-    document.querySelectorAll('.gv-ath-day-event-title-result').forEach(el => {
+    Array.from(document.querySelectorAll('.gv-ath-day-event-title-result')).forEach(el => {
         el.addEventListener('click', function(e) {
             let ref = this.getAttribute("data-id");
             this.classList.add("day-expanded");
@@ -626,16 +627,19 @@ function addListeners() {
             closeBtn.classList.remove('open');
             closeBtn.classList.add('close');
 
-            document.querySelectorAll('.gv-ath-day-event-table').forEach(tableEl => {
+            Array.from(document.querySelectorAll('.gv-ath-day-event-table')).forEach(tableEl => {
                 if (ref === tableEl.getAttribute("data-id")) {
                     tableEl.classList.remove("hide-el");
                     tableEl.classList.add("show-el");
                 }
             })
+           // addCloseResultListener(this, tableEl);
         })
+
+        
     });
 
-    document.querySelectorAll('.gv-ath-table-url').forEach(el => {
+    Array.from(document.querySelectorAll('.gv-ath-table-url')).forEach(el => {
         el.addEventListener('click', function(e) {
             let ref = this.getAttribute("url-data");
             window.open(ref);
@@ -644,7 +648,7 @@ function addListeners() {
 
     document.querySelector('#gv-ath-day-selector').addEventListener('change', function(e) {
         let t = e.target.value;
-        document.querySelectorAll('.gv-day-slice-section').forEach(el => {
+        Array.from(document.querySelectorAll('.gv-day-slice-section')).forEach(el => {
             t === el.getAttribute("data-id") ? el.classList.remove("hide-el") : el.classList.add("hide-el");
         })
     })
@@ -655,9 +659,55 @@ function addListeners() {
 
 }
 
+
+function addCloseResultListener(el, tableEl){
+ 
+    el.addEventListener('click', function(e) {
+            this.classList.remove("day-expanded");
+
+            var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
+            closeBtn.classList.remove('close');
+            closeBtn.classList.add('open');
+
+         
+            tableEl.classList.remove("show-el");
+            tableEl.classList.add("hide-el");
+         
+        })
+
+    addOpenResultListener(el);
+
+}
+
+
+function addOpenResultListener(el){
+
+    el.addEventListener('click', function(e) {
+            let ref = this.getAttribute("data-id");
+            this.classList.add("day-expanded");
+
+            var closeBtn = this.querySelector('.gv-ath-table-row__close-btn');
+            closeBtn.classList.remove('open');
+            closeBtn.classList.add('close');
+
+
+
+            Array.from(document.querySelectorAll('.gv-ath-day-event-table')).forEach(tableEl => {
+                if (ref === tableEl.getAttribute("data-id")) {
+                    tableEl.classList.remove("hide-el");
+                    tableEl.classList.add("show-el");
+                }
+            })
+        })
+    addCloseResultListener(el);
+}
+
+
 function initView() {
 
-    document.querySelectorAll('.gv-day-slice-section').forEach(el => {
+console.log( document.querySelectorAll('.gv-day-slice-section') )
+
+    Array.from(document.querySelectorAll('.gv-day-slice-section')).forEach(el => {
         if (el.getAttribute("data-id") === "day-slice-1") {
             el.classList.remove("hide-el")
         }
@@ -677,11 +727,11 @@ function initView() {
         document.getElementById('gv-ath-medal-by-country-selector').value = "67";
         updateCountryView("67");
 
-        document.querySelectorAll('.om-medal-white').forEach(el => {
+        Array.from(document.querySelectorAll('.om-medal-white')).forEach(el => {
             el.style.transform = "scaleX(3)";
         })
 
-        document.querySelectorAll('.om-medal-circle').forEach(el => {
+        Array.from(document.querySelectorAll('.om-medal-circle')).forEach(el => {
 
             el.style.transform = "scale(3)";
         })
@@ -703,12 +753,12 @@ function initView() {
     }
 
     function updateCountryView(n) {
-        document.getElementById("list-medals-by-country").querySelectorAll(".om-table-row").forEach(el => {
+        Array.from(document.getElementById("list-medals-by-country").querySelectorAll(".om-table-row")).forEach(el => {
             el.classList.add("hidden-row")
             if (el.getAttribute("data-position") == n) { el.classList.remove("hidden-row") }
         })
 
-        document.getElementById("slice-medals-by-country").querySelectorAll(".gv-ath-wrapper").forEach(el => {
+        Array.from(document.getElementById("slice-medals-by-country").querySelectorAll(".gv-ath-wrapper")).forEach(el => {
             el.classList.add("hide-el")
             if (el.getAttribute("data-position") == n) { el.classList.remove("hide-el") }
         })

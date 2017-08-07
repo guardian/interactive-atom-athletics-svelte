@@ -216,7 +216,7 @@
             border-color: $gold;
             background-color: $gold;
         }
-         &.color-Gold, &.color-Silver, &.color-Bronze{
+        &.color-Gold, &.color-Silver, &.color-Bronze{
            margin:  1px 14px 1px 1px; 
 
            @include mq(tablet){
