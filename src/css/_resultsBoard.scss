@@ -273,6 +273,8 @@
         	transform: rotate(45deg);
             right: 0;  
 
+            opacity:0;
+
         }
         &.open{
         	background-image:url('<%= path %>/assets/imgs/plus.svg');     
