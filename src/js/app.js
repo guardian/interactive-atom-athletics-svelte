@@ -16,7 +16,6 @@ let countries;
 
 let IAAFstem = "http://www.iaafworldchampionships.com/events/";
 
-
 xr.get('https://interactive.guim.co.uk/docsdata-test/15MIxf9S4_vA2WL9C15ip-ITo1oQ96A25xpbPSsD8Mck.json').then((resp) => {
 
     var data = formatData(resp.data);

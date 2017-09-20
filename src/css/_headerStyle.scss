@@ -3,16 +3,18 @@
     position: relative
 }
 .content__head--interactive .gs-container {
+    // background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/pod-bg.png");
     background-image: url("https://interactive.guim.co.uk/atoms/2017/07/bolt-timer/pod-bg.png");
     background-repeat: no-repeat;
-    background-position: top right;
+    background-position: center right;
     overflow: hidden;
-    background-size: auto 100%;
-    position: relative
+    background-size: 910px auto;
+    position: relative;
+   
 }
 @media (min-width: 46.25em) {
     .content__head--interactive .gs-container {
-           height: 320px 
+           height: 252px;
 
     }
 }
